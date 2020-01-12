@@ -18,8 +18,8 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       suggestions.style.display = 'block';
       getLyric();
 
-    } catch (error) {      
-      if(error) {
+    } catch (error) {
+      if (error) {
         alert.textContent = JSON.stringify(errorMsg);
       }
     }
@@ -56,13 +56,31 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const resp = await response.data;
 
       document.getElementById('lyrics').innerHTML = `
-      <h3><span class="mr-20">${song[0]} - ${song[1]}</span> <button id="btn-cop">copy</button></h3>
-      <textarea class="p0">${resp.lyrics}</textarea>`;
+      <h3><span class="mr-20">${song[0]} - ${song[1]}</span> <button id="btn-copy">copy</button></h3>
+      <textarea class="lyric p0">${resp.lyrics}</textarea>`;
+
+
+      var btnCopy = document.getElementById('btn-copy');
+      if (btnCopy) {
+        btnCopy.addEventListener('click', () => {
+          btnCopy.textContent = 'copied';
+          copyToClipboard(document.querySelector('.lyric'));
+
+          setTimeout(() => {
+            btnCopy.textContent = 'copy';
+          }, 3000);
+        });
+      }
 
     } catch (err) {
-      if(err) {
+      if (err) {
         alert.textContent = JSON.stringify(errorMsg);
       }
     }
   }
+
+  function copyToClipboard (textarea) {
+    textarea.select();
+    document.execCommand('copy');
+  };
 });
