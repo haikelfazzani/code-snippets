@@ -80,8 +80,11 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
     if (songAudio && songAudio.length > 20) {
       const audio = document.getElementById('preview');
       audio.src = songAudio;
-      btnLiten.addEventListener('click', () => {                
-        audio.paused ? (audio.play() ,btnLiten.textContent = 'pause') : (audio.pause(),btnLiten.textContent = 'play');
+      btnLiten.addEventListener('click', () => {
+        audio.paused ? (audio.play(), btnLiten.textContent = 'pause') : (audio.pause(), btnLiten.textContent = 'play');
+        audio.onended = () => {
+          btnLiten.textContent = 'play';
+        }
       });
     }
   }
