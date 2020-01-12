@@ -56,22 +56,19 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const resp = await response.data;
 
       document.getElementById('lyrics').innerHTML = `
-      <h3><span class="mr-20">${song[0]} - ${song[1]}</span> <button id="btn-copy">copy</button></h3>
+      <h3>
+        <span class="mr-20">${song[0]} - ${song[1]}</span> 
+        <button id="btn-listen">play</button>
+        <button id="btn-copy">copy</button>
+      </h3>
       <textarea class="lyric p0">${resp.lyrics}</textarea>`;
 
-
       var btnCopy = document.getElementById('btn-copy');
-      if (btnCopy) {
-        btnCopy.addEventListener('click', () => {
-          btnCopy.textContent = 'copied';
-          copyToClipboard(document.querySelector('.lyric'));
-
-          setTimeout(() => {
-            btnCopy.textContent = 'copy';
-          }, 3000);
-        });
-      }
-
+      copyToClipboard(btnCopy, document.querySelector('.lyric'));
+      // play the extract audio (preview)
+      let songAudio = results.find(res => res.title === song[0].trim()).preview;
+      var btnLiten = document.getElementById('btn-listen');
+      listenToPreview(btnLiten, songAudio);
     } catch (err) {
       if (err) {
         alert.textContent = JSON.stringify(errorMsg);
@@ -79,8 +76,27 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
     }
   }
 
-  function copyToClipboard (textarea) {
-    textarea.select();
-    document.execCommand('copy');
-  };
+  function listenToPreview (btnLiten, songAudio) {
+    if (songAudio && songAudio.length > 20) {
+      const audio = document.getElementById('preview');
+      audio.src = songAudio;
+      btnLiten.addEventListener('click', () => {                
+        audio.paused ? (audio.play() ,btnLiten.textContent = 'pause') : (audio.pause(),btnLiten.textContent = 'play');
+      });
+    }
+  }
+
+  function copyToClipboard (btnCopy, textarea) {
+    if (btnCopy) {
+      btnCopy.addEventListener('click', () => {
+        btnCopy.textContent = 'copied';
+        textarea.select();
+        document.execCommand('copy');
+        setTimeout(() => {
+          btnCopy.textContent = 'copy';
+        }, 3000);
+      });
+    }
+
+  }
 });
