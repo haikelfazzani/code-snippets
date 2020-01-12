@@ -56,10 +56,12 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const resp = await response.data;
 
       document.getElementById('lyrics').innerHTML = `
-      <h3>
+      <h3 class="disp-flex">
         <span class="mr-20">${song[0]} - ${song[1]}</span> 
-        <button id="btn-listen">play</button>
-        <button id="btn-copy">copy</button>
+        <div>
+          <button id="btn-listen">preview</button>
+          <button id="btn-copy">copy</button>
+        </div>
       </h3>
       <textarea class="lyric p0">${resp.lyrics}</textarea>`;
 
@@ -81,9 +83,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const audio = document.getElementById('preview');
       audio.src = songAudio;
       btnLiten.addEventListener('click', () => {
-        audio.paused ? (audio.play(), btnLiten.textContent = 'pause') : (audio.pause(), btnLiten.textContent = 'play');
+        audio.paused ? (audio.play(), btnLiten.textContent = 'pause') : (audio.pause(), btnLiten.textContent = 'preview');
         audio.onended = () => {
-          btnLiten.textContent = 'play';
+          btnLiten.textContent = 'preview';
         }
       });
     }

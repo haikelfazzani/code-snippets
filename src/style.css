@@ -1,4 +1,6 @@
 body {
+  background-color: rgb(26, 27, 27);
+  color: rgb(255, 255, 255);
   font-family: 'Poppins', sans-serif;
   margin: 0;
 }
@@ -13,6 +15,7 @@ h1{color: #00bcd4;}
 }
 
 input[type='search'] {
+  color: #ffffff;;
   width: 100%;
   padding: 10px 0;
   background-color: transparent;
@@ -39,6 +42,8 @@ input[type='search'] {
 #altert { color: #d41818; margin-top: 20px;}
 
 textarea {
+  background-color: rgb(26, 27, 27);
+    color: rgb(255, 255, 255);
   font-family: 'Poppins', sans-serif;
   width: 100%; 
   height: 100%; 
@@ -65,9 +70,14 @@ button {
 button:hover { color: #ffffff; background-color: #202022; }
 
 h3{ color: #e91e63;}
-h4{ color: #555555; transition: color .4s;}
-h4:hover{ color: #000000; }
+h4{ color: #bbbaba; transition: color .4s;}
+h4:hover{ color: #ffffff; }
 
+.disp-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .disp-none { display: none !important;}
 .cl-gray{ color: #696969;}
 .w100{ width: 100% !important;}
@@ -79,5 +89,5 @@ h4:hover{ color: #000000; }
 /* scrollbar */
 ::-webkit-scrollbar {width: 5px;}
 ::-webkit-scrollbar-track {background: #f1f1f1;}
-::-webkit-scrollbar-thumb {background: rgb(26, 27, 27);}
+::-webkit-scrollbar-thumb {background: rgb(38, 39, 39);}
 ::-webkit-scrollbar-thumb:hover {background: #555;}
