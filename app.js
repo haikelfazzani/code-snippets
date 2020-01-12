@@ -55,9 +55,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const response = await axios.get(`${BASE_URL}/v1/${song[1]}/${song[0]}`);
       const resp = await response.data;
 
-      let lyrics = resp.lyrics.replace(/\n|\r\n/g, "<br />");
-      document.getElementById('lyrics').innerHTML = `<h3>${song[0]} - ${song[1]}</h3>
-        <p class="p0">${lyrics}</p>`;
+      document.getElementById('lyrics').innerHTML = `
+      <h3><span class="mr-20">${song[0]} - ${song[1]}</span> <button id="btn-cop">copy</button></h3>
+      <textarea class="p0">${resp.lyrics}</textarea>`;
 
     } catch (err) {
       if(err) {
