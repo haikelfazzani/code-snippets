@@ -29,6 +29,7 @@ li{cursor: pointer;}
   border: 1px solid rgba(255, 255, 255, 0.26);
   background-color: #1c1c1d;
 }
+.alert-danger{display: none;}
 /* scrollbar */
 ::-webkit-scrollbar {width: 5px;}
 ::-webkit-scrollbar-track {background: #f1f1f1;}

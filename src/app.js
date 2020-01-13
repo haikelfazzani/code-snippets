@@ -1,7 +1,7 @@
 const BASE_URL = "https://api.lyrics.ovh";
 const suggestions = document.querySelector('.suggestions');
 var results = [];
-var alert = document.getElementById('alert');
+var alert = document.querySelector('.alert-danger');
 
 document.getElementById('search').addEventListener('keyup', async (e) => {
   let searchValue = e.target.value;
@@ -17,9 +17,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       suggestions.style.display = 'block';
       getLyric();
     } catch (error) {
-      setTimeout(() => {
-        alert.textContent = err ? 'There were no results found.' : '';
-      }, 300);
+      alert.style.display = 'block';
+      alert.textContent = err ? 'There were no results found.' : '';
+      setTimeout(() => { alert.style.display = 'none'; }, 5000);
     }
   }
 
@@ -84,9 +84,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       fullScreen(document.getElementById('btn-full'));
 
     } catch (err) {
-      setTimeout(() => {
-        alert.textContent = err ? 'There were no results found.' : '';
-      }, 300);
+      alert.style.display = 'block';
+      alert.textContent = err ? 'There were no results found.' : '';
+      setTimeout(() => { alert.style.display = 'none'; }, 5000);
     }
   }
 
