@@ -1,1 +1,128 @@
-"use strict";var BASE_URL="https://api.lyrics.ovh",suggestions=document.querySelector(".suggestions"),results=[],alert=document.getElementById("alert");document.getElementById("search").addEventListener("keyup",async function(t){var e=t.target.value;if(e&&e.length>1)try{var n=await axios.get(BASE_URL+"/suggest/"+encodeURIComponent(e)),i=await n.data;results=i.data.filter(function(t,e){return e<=5}),await async function(t){suggestions.innerHTML="",await t.forEach(function(t){suggestions.innerHTML+='<li class="suggest" data-id="'+t.title+"-"+t.artist.name+'">\n        <div>\n          <h4 class="m0">'+t.title+" - "+t.artist.name+'</h4>\n          <small class="cl-gray">'+t.album.title+'</small>\n        </div>\n        <audio src="'+t.preview+'" controls></audio>\n      </li>'})}(results),suggestions.style.display="block",function(){if(results&&results.length>0){var t=document.querySelectorAll(".suggest");t.forEach(function(t){t.addEventListener("click",async function(){await async function(t){try{await async function(){suggestions.style.display="none";var e=t.getAttribute("data-id").split("-"),n=await axios.get(BASE_URL+"/v1/"+e[1]+"/"+e[0]),i=await n.data,s=results.find(function(t){return t.title===e[0].trim()}).album;document.getElementById("lyrics").innerHTML='\n      <h3 class="disp-flex">\n        <div class="flex-col">\n          <span class="mr-20">'+e[0]+" - "+e[1]+"</span> \n          <small>Album: "+s.title+'</small>\n        </div>\n        <div>\n          <button id="btn-listen">preview</button>\n          <button id="btn-copy">copy</button>          \n          <button id="btn-full">📺</button>     \n        </div>\n      </h3>\n      <textarea class="lyric p0">'+i.lyrics+'</textarea>      \n      <img src="'+s.cover_medium+'" alt="album cover" />',function(t,e){t&&t.addEventListener("click",function(){t.textContent="copied",e.select(),document.execCommand("copy"),setTimeout(function(){t.textContent="copy"},3e3)})}(document.getElementById("btn-copy"),document.querySelector(".lyric"));var a,l,o=results.find(function(t){return t.title===e[0].trim()}).preview;(function(t,e){e&&e.length>20&&((n=document.getElementById("preview")).src=e,t.addEventListener("click",function(){n.paused?(n.play(),t.textContent="pause"):(n.pause(),t.textContent="preview"),n.onended=function(){t.textContent="preview"}}));var n})(document.getElementById("btn-listen"),o),a=document.getElementById("btn-full"),l=!1,a.addEventListener("click",function(){l=!l,document.querySelector(".header").style.display=l?"none":"block",document.querySelector(".search-container").style.display=l?"none":"block"})}()}catch(t){setTimeout(function(){alert.textContent=t?"There were no results found.":""},300)}}(t)})})}}()}catch(t){setTimeout(function(){alert.textContent=err?"There were no results found.":""},300)}});
+const BASE_URL = "https://api.lyrics.ovh";
+const suggestions = document.querySelector('.suggestions');
+var results = [];
+var alert = document.getElementById('alert');
+
+document.getElementById('search').addEventListener('keyup', async (e) => {
+  let searchValue = e.target.value;
+
+  if (searchValue && searchValue.length > 1) {
+    try {
+      // title, preview (audio), artist.name, artist.picture, album.title
+      const resp = await axios.get(BASE_URL + '/suggest/' + encodeURIComponent(searchValue));
+      const response = await resp.data;
+
+      results = response.data.filter((v, i) => i <= 5);
+      await createListSuggestion(results);
+      suggestions.style.display = 'block';
+      getLyric();
+    } catch (error) {
+      setTimeout(() => {
+        alert.textContent = err ? 'There were no results found.' : '';
+      }, 300);
+    }
+  }
+
+  async function createListSuggestion (results) {
+    suggestions.innerHTML = '';
+    await results.forEach(result => {
+      suggestions.innerHTML += `
+      <li class="suggest list-group-item bg-dark d-flex justify-content-between" data-id="${result.title}-${result.artist.name}">
+        <div>
+          <h4 class="m-0">${result.title} - ${result.artist.name}</h4>
+          <small>${result.album.title}</small>
+        </div>
+        <audio src="${result.preview}" controls></audio>
+      </li>`;
+    });
+  }
+
+  function getLyric () {
+    if (results && results.length > 0) {
+      let suggest = document.querySelectorAll('.suggest');
+      suggest.forEach(s => {
+        s.addEventListener('click', async () => { await createLyric(s) });
+      });
+    }
+  }
+
+  async function createLyric (s) {
+    try {
+      suggestions.style.display = 'none';
+      let song = s.getAttribute('data-id').split('-');
+
+      const response = await axios.get(`${BASE_URL}/v1/${song[1]}/${song[0]}`);
+      const resp = await response.data;
+
+      let album = results.find(res => res.title === song[0].trim()).album;
+
+      document.getElementById('lyrics').innerHTML = `
+      <h3 class="d-flex justify-content-between">
+        <div class="d-flex flex-column bd-highlight mb-3">
+          <span>${song[0]} - ${song[1]}</span> 
+          <small>Album: ${album.title}</small>
+        </div>
+        <div>
+          <button id="btn-listen" class="btn btn-dark">preview</button>
+          <button id="btn-copy" class="btn btn-dark">copy</button>          
+          <button id="btn-full" class="btn btn-dark">📺</button>     
+        </div>
+      </h3>
+      <div class="row h-100 mb-5">
+        <div class="col-md-9">
+        <textarea class="lyric bg-dark w-100 h-100">${resp.lyrics}</textarea>      
+        </div>
+        <div class="col-md-3"><img src="${album.cover_medium}" alt="album cover" /></div>
+      </div>`;
+
+      var btnCopy = document.getElementById('btn-copy');
+      copyToClipboard(btnCopy, document.querySelector('.lyric'));
+      // play the extract audio (preview)
+      let songAudio = results.find(res => res.title === song[0].trim()).preview;
+      var btnLiten = document.getElementById('btn-listen');
+      listenToPreview(btnLiten, songAudio);
+      fullScreen(document.getElementById('btn-full'));
+
+    } catch (err) {
+      setTimeout(() => {
+        alert.textContent = err ? 'There were no results found.' : '';
+      }, 300);
+    }
+  }
+
+  function listenToPreview (btnLiten, songAudio) {
+    if (songAudio && songAudio.length > 20) {
+      const audio = document.getElementById('preview');
+      audio.src = songAudio;
+      btnLiten.addEventListener('click', () => {
+        audio.paused ? (audio.play(), btnLiten.textContent = 'pause') : (audio.pause(), btnLiten.textContent = 'preview');
+        audio.onended = () => {
+          btnLiten.textContent = 'preview';
+        }
+      });
+    }
+  }
+
+  function copyToClipboard (btnCopy, textarea) {
+    if (btnCopy) {
+      btnCopy.addEventListener('click', () => {
+        btnCopy.textContent = 'copied';
+        textarea.select();
+        document.execCommand('copy');
+        setTimeout(() => {
+          btnCopy.textContent = 'copy';
+        }, 3000);
+      });
+    }
+
+  }
+
+  function fullScreen (btnFullScreen) {
+    var isFullScreen = false;
+    btnFullScreen.addEventListener('click', () => {
+      isFullScreen = isFullScreen ? false : true;
+      document.querySelector('.header').style.display = isFullScreen ? 'none' : 'block';
+      document.querySelector('.search-container').style.display = isFullScreen ? 'none' : 'block';
+    });
+  }
+});
