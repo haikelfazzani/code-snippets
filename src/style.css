@@ -20,16 +20,17 @@ input[type="search"] {
   border-bottom: 2px solid #cecece;  
   background-color: transparent;
 }
-
 li{cursor: pointer;}
+.list-group-item {
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background-color: #1c1c1d;
+}
 /* scrollbar */
 ::-webkit-scrollbar {width: 5px;}
 ::-webkit-scrollbar-track {background: #f1f1f1;}
 ::-webkit-scrollbar-thumb {background: rgb(38, 39, 39);}
 ::-webkit-scrollbar-thumb:hover {background: #555;}
 
-
-.list-group-item {
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  background-color: #1c1c1d;
+@media screen and (max-width: 600px) { 
+  .lyrics img {display: none;}
 }

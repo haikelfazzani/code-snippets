@@ -72,7 +72,7 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
         <div class="col-md-9">
         <textarea class="lyric bg-dark w-100 h-100">${resp.lyrics}</textarea>      
         </div>
-        <div class="col-md-3"><img src="${album.cover_medium}" alt="album cover" /></div>
+        <div class="col-md-3"><img src="${album.cover_medium}" alt="album cover" class="img-thumbnail" /></div>
       </div>`;
 
       var btnCopy = document.getElementById('btn-copy');
@@ -121,7 +121,7 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
     var isFullScreen = false;
     btnFullScreen.addEventListener('click', () => {
       isFullScreen = isFullScreen ? false : true;
-      document.querySelector('.header').style.display = isFullScreen ? 'none' : 'block';
+      document.getElementById('header').style.display = isFullScreen ? 'none' : 'block';
       document.querySelector('.search-container').style.display = isFullScreen ? 'none' : 'block';
     });
   }
