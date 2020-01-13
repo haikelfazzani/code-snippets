@@ -2,7 +2,6 @@ const BASE_URL = "https://api.lyrics.ovh";
 const suggestions = document.querySelector('.suggestions');
 var results = [];
 var alert = document.getElementById('alert');
-var errorMsg = "There were no results found.";
 
 document.getElementById('search').addEventListener('keyup', async (e) => {
   let searchValue = e.target.value;
@@ -18,9 +17,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       suggestions.style.display = 'block';
       getLyric();
     } catch (error) {
-      if (error) {
-        alert.textContent = errorMsg;
-      }
+      setTimeout(() => {
+        alert.textContent = err ? 'There were no results found.' : '';
+      }, 300);
     }
   }
 
@@ -76,13 +75,13 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       // play the extract audio (preview)
       let songAudio = results.find(res => res.title === song[0].trim()).preview;
       var btnLiten = document.getElementById('btn-listen');
-      listenToPreview(btnLiten, songAudio);      
+      listenToPreview(btnLiten, songAudio);
       fullScreen(document.getElementById('btn-full'));
 
     } catch (err) {
-      if (err) {
-        alert.textContent = errorMsg;
-      }
+      setTimeout(() => {
+        alert.textContent = err ? 'There were no results found.' : '';
+      }, 300);
     }
   }
 
@@ -113,12 +112,12 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
 
   }
 
-  function fullScreen(btnFullScreen){
+  function fullScreen (btnFullScreen) {
     var isFullScreen = false;
-    btnFullScreen.addEventListener('click', () =>{
-      isFullScreen = isFullScreen ? false:true;
-      document.querySelector('.header').style.display = isFullScreen ? 'none':'block';
-      document.querySelector('.search-container').style.display = isFullScreen ? 'none':'block';
-    });    
+    btnFullScreen.addEventListener('click', () => {
+      isFullScreen = isFullScreen ? false : true;
+      document.querySelector('.header').style.display = isFullScreen ? 'none' : 'block';
+      document.querySelector('.search-container').style.display = isFullScreen ? 'none' : 'block';
+    });
   }
 });
