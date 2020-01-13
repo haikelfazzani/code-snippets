@@ -17,10 +17,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       await createListSuggestion(results);
       suggestions.style.display = 'block';
       getLyric();
-
     } catch (error) {
       if (error) {
-        alert.textContent = JSON.stringify(errorMsg);
+        alert.textContent = errorMsg;
       }
     }
   }
@@ -55,15 +54,19 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const response = await axios.get(`${BASE_URL}/v1/${song[1]}/${song[0]}`);
       const resp = await response.data;
 
+      let albumCover = results.find(res => res.title === song[0].trim()).album.cover_medium;
+
       document.getElementById('lyrics').innerHTML = `
       <h3 class="disp-flex">
         <span class="mr-20">${song[0]} - ${song[1]}</span> 
         <div>
           <button id="btn-listen">preview</button>
-          <button id="btn-copy">copy</button>
+          <button id="btn-copy">copy</button>          
         </div>
       </h3>
-      <textarea class="lyric p0">${resp.lyrics}</textarea>`;
+      <textarea class="lyric p0">${resp.lyrics}</textarea>      
+      <img src="${albumCover}" alt="album cover" />
+      `;
 
       var btnCopy = document.getElementById('btn-copy');
       copyToClipboard(btnCopy, document.querySelector('.lyric'));
@@ -73,7 +76,7 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       listenToPreview(btnLiten, songAudio);
     } catch (err) {
       if (err) {
-        alert.textContent = JSON.stringify(errorMsg);
+        alert.textContent = errorMsg;
       }
     }
   }
