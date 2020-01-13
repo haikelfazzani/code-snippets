@@ -5,7 +5,7 @@ body {
   font-family: 'Poppins', sans-serif;  
 }
 
-h1{color: #00bcd4;}
+h1{color: #00bcd4; z-index: 1;}
 a{font-size: 14px; font-weight: 100; color: #3f3f3f; text-decoration: none; transition: color .3s;}
 
 .container{

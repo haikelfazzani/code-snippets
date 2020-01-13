@@ -65,6 +65,7 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
         <div>
           <button id="btn-listen">preview</button>
           <button id="btn-copy">copy</button>          
+          <button id="btn-full">📺</button>     
         </div>
       </h3>
       <textarea class="lyric p0">${resp.lyrics}</textarea>      
@@ -75,7 +76,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       // play the extract audio (preview)
       let songAudio = results.find(res => res.title === song[0].trim()).preview;
       var btnLiten = document.getElementById('btn-listen');
-      listenToPreview(btnLiten, songAudio);
+      listenToPreview(btnLiten, songAudio);      
+      fullScreen(document.getElementById('btn-full'));
+
     } catch (err) {
       if (err) {
         alert.textContent = errorMsg;
@@ -108,5 +111,14 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       });
     }
 
+  }
+
+  function fullScreen(btnFullScreen){
+    var isFullScreen = false;
+    btnFullScreen.addEventListener('click', () =>{
+      isFullScreen = isFullScreen ? false:true;
+      document.querySelector('.header').style.display = isFullScreen ? 'none':'block';
+      document.querySelector('.search-container').style.display = isFullScreen ? 'none':'block';
+    });    
   }
 });

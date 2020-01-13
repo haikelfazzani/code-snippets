@@ -2,7 +2,7 @@
 
 ### todo
 - [x] copy to clipboard
-- [ ] fullscreen
+- [x] fullscreen
 
 - [ ] autocomplete using prefix tree
 - [ ] caching using memoization
