@@ -65,8 +65,7 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
         </div>
       </h3>
       <textarea class="lyric p0">${resp.lyrics}</textarea>      
-      <img src="${albumCover}" alt="album cover" />
-      `;
+      <img src="${albumCover}" alt="album cover" />`;
 
       var btnCopy = document.getElementById('btn-copy');
       copyToClipboard(btnCopy, document.querySelector('.lyric'));
