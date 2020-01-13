@@ -8,11 +8,15 @@ body,.bg-dark {
 .container{height: 100vh;}
 
 h1{color: #00bcd4;}
-a{font-size: 14px; font-weight: 100; color: #cecece; text-decoration: none; transition: color .3s;}
+a{font-size: 14px; font-weight: 100; color: #cecece; 
+  text-decoration: none !important; transition: color .3s;}
 
-textarea{color: #fff !important; border: 0; outline: none;}
+a small:hover{color: #fff !important;}
 
-small {font-size: 12px; color: #cecece;}
+textarea{color: #fff !important; border: 0; outline: none; overflow: hidden;}
+textarea:hover {overflow: auto;}
+
+small {font-size: 12px; color: #cecece; transition: color .3s;}
 .btn{font-size: 12px; font-weight: 600; text-transform: uppercase;}
 input[type="search"] {
   border-radius: 0;
@@ -33,4 +37,6 @@ li{cursor: pointer;}
 
 @media screen and (max-width: 600px) { 
   .lyrics img {display: none;}
+  h3{font-size: 18px;}
+  .d-flex{display: flex; flex-direction: column;}
 }
