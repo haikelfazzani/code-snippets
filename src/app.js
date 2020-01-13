@@ -13,9 +13,13 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const response = await resp.data;
 
       results = response.data.filter((v, i) => i <= 5);
-      await createListSuggestion(results);
-      suggestions.style.display = 'block';
-      getLyric();
+      await createListSuggestions(results);
+
+      setTimeout(() => {//when user choose the lyric
+        suggestions.style.display = 'block';
+        getLyric(); // attach and display the lyric to dom
+      }, 100);
+
     } catch (error) {
       alert.style.display = 'block';
       alert.textContent = err ? 'There were no results found.' : '';
@@ -23,7 +27,7 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
     }
   }
 
-  async function createListSuggestion (results) {
+  async function createListSuggestions (results) {
     suggestions.innerHTML = '';
     await results.forEach(result => {
       suggestions.innerHTML += `
@@ -40,16 +44,16 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
   function getLyric () {
     if (results && results.length > 0) {
       let suggest = document.querySelectorAll('.suggest');
-      suggest.forEach(s => {
-        s.addEventListener('click', async () => { await createLyric(s) });
+      suggest.forEach(liLyric => {
+        liLyric.addEventListener('click', async () => { await displayLyric(liLyric) });
       });
     }
   }
 
-  async function createLyric (s) {
+  async function displayLyric (liLyric) {
     try {
       suggestions.style.display = 'none';
-      let song = s.getAttribute('data-id').split('-');
+      let song = liLyric.getAttribute('data-id').split('-');
 
       const response = await axios.get(`${BASE_URL}/v1/${song[1]}/${song[0]}`);
       const resp = await response.data;
