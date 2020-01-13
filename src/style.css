@@ -74,6 +74,11 @@ button {
 button:hover { color: #ffffff; background-color: #202022; }
 
 h3{ color: #e91e63;}
+h3 small {
+  color: #6b6b6b;
+    font-weight: 100;
+    font-size: 13px;
+}
 h4{ color: #bbbaba; transition: color .4s;}
 a:hover,h4:hover{ color: #ffffff; }
 

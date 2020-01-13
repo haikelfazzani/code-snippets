@@ -54,18 +54,21 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const response = await axios.get(`${BASE_URL}/v1/${song[1]}/${song[0]}`);
       const resp = await response.data;
 
-      let albumCover = results.find(res => res.title === song[0].trim()).album.cover_medium;
+      let album = results.find(res => res.title === song[0].trim()).album;
 
       document.getElementById('lyrics').innerHTML = `
       <h3 class="disp-flex">
-        <span class="mr-20">${song[0]} - ${song[1]}</span> 
+        <div class="flex-col">
+          <span class="mr-20">${song[0]} - ${song[1]}</span> 
+          <small>Album: ${album.title}</small>
+        </div>
         <div>
           <button id="btn-listen">preview</button>
           <button id="btn-copy">copy</button>          
         </div>
       </h3>
       <textarea class="lyric p0">${resp.lyrics}</textarea>      
-      <img src="${albumCover}" alt="album cover" />`;
+      <img src="${album.cover_medium}" alt="album cover" />`;
 
       var btnCopy = document.getElementById('btn-copy');
       copyToClipboard(btnCopy, document.querySelector('.lyric'));
