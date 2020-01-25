@@ -1,24 +1,31 @@
 const BASE_URL = "https://api.lyrics.ovh";
 const suggestions = document.querySelector('.suggestions');
-var results = [];
+let lyricsElmnt = document.getElementById('lyrics');
 var alert = document.querySelector('.alert-danger');
+var spinnerEl = document.querySelector('.spinner-container');
+
+var results = [];
+lyricsElmnt.style.display = 'none';
+spinnerEl.style.display = 'none';
 
 document.getElementById('search').addEventListener('keyup', async (e) => {
   let searchValue = e.target.value;
 
-  if (searchValue && searchValue.length > 1) {
+  if (searchValue && searchValue.length > 1) {    
     try {
       // title, preview (audio), artist.name, artist.picture, album.title
       const resp = await axios.get(BASE_URL + '/suggest/' + encodeURIComponent(searchValue));
       const response = await resp.data;
 
       results = response.data.filter((v, i) => i <= 5);
-      await createListSuggestions(results);
+      setTimeout(async () => {
+        await createListSuggestions(results);        
+      }, 200);
 
       setTimeout(() => {//when user choose the lyric
         suggestions.style.display = 'block';
         getLyric(); // attach and display the lyric to dom
-      }, 100);
+      }, 300);
 
     } catch (error) {
       alert.style.display = 'block';
@@ -28,7 +35,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
   }
 
   async function createListSuggestions (results) {
+    spinnerEl.style.display = 'block';
     suggestions.innerHTML = '';
+    spinnerEl.style.display = results ? 'none' : 'block';
     await results.forEach(result => {
       suggestions.innerHTML += `
       <li class="suggest list-group-item bg-dark d-flex justify-content-between" data-id="${result.title}-${result.artist.name}">
@@ -39,6 +48,7 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
         <audio src="${result.preview}" controls></audio>
       </li>`;
     });
+    spinnerEl.style.display = 'none';
   }
 
   function getLyric () {
@@ -47,6 +57,9 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       suggest.forEach(liLyric => {
         liLyric.addEventListener('click', async () => { await displayLyric(liLyric) });
       });
+    }
+    else {
+      spinnerEl.style.display = 'block';
     }
   }
 
@@ -59,8 +72,8 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       const resp = await response.data;
 
       let album = results.find(res => res.title === song[0].trim()).album;
-
-      document.getElementById('lyrics').innerHTML = `
+      lyricsElmnt.style.display = 'block';
+      lyricsElmnt.innerHTML = `
       <h3 class="d-flex justify-content-between">
         <div class="d-flex flex-column bd-highlight mb-3">
           <span>${song[0]} - ${song[1]}</span> 
@@ -86,6 +99,8 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       var btnLiten = document.getElementById('btn-listen');
       listenToPreview(btnLiten, songAudio);
       fullScreen(document.getElementById('btn-full'));
+
+      spinnerEl.style.display = resp ? 'none' : 'block';
 
     } catch (err) {
       alert.style.display = 'block';

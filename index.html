@@ -13,10 +13,9 @@
   <link rel="stylesheet" href="src/style.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-  <div class="container py-5">
+  <div class="container-fluid h-100">
     <audio src="" id="preview" hidden></audio>
 
     <header id="header">
@@ -32,11 +31,17 @@
       <div class="form-group">
         <input type="search" class="form-control form-control-lg pl-0" name="search" id="search" placeholder="Search.." />
       </div>
-      <ul class="suggestions list-group"></ul>
+      <ul class="suggestions list-group mb-5"></ul>
     </div>
 
     <div class="alert alert-danger mt-3"></div>
-    <div class="lyrics h-100" id="lyrics"></div>
+    <div class="lyrics h-75" id="lyrics"></div>
+  </div>
+
+  <div class="spinner-container">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

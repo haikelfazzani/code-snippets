@@ -1,0 +1,24 @@
+{
+  "name": "lyrics-finder",
+  "version": "1.0.0",
+  "description": "lyrics finder website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haikelfazzani/lyrics-finder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haikelfazzani/lyrics-finder/issues"
+  },
+  "homepage": "https://github.com/haikelfazzani/lyrics-finder#readme",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}
