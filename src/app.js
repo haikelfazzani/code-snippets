@@ -87,7 +87,7 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
       </h3>
       <div class="row h-100 mb-5">
         <div class="col-md-9">
-        <textarea class="lyric bg-dark w-100 h-100">${resp.lyrics}</textarea>      
+        <textarea class="lyric bg-dark-op w-100 h-100">${resp.lyrics}</textarea>      
         </div>
         <div class="col-md-3"><img src="${album.cover_medium}" alt="album cover" class="img-thumbnail" /></div>
       </div>`;
@@ -145,3 +145,6 @@ document.getElementById('search').addEventListener('keyup', async (e) => {
     });
   }
 });
+
+/** render canvas */
+document.body.appendChild(Snow.getCanvas())

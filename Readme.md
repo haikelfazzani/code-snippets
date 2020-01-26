@@ -7,8 +7,9 @@
 - [ ] autocomplete using prefix tree
 - [ ] caching using memoization
 
-### API
+### API & PACKAGES
 - [lyrics](https://api.lyrics.ovh)
+- [Snow canvas](https://github.com/haikelfazzani/snow-cvs)
 
 ## License
 MIT
