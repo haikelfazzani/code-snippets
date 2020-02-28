@@ -27,8 +27,8 @@ export default function LyricDetails () {
 
     <InlineMedia
       artist={artist}
-      cover={infos.artist ? infos.artist.picture_medium : ''} /
-    >
+      cover={infos.artist ? infos.artist.picture_medium : ''}
+    />
 
     <div className="lyric-infos">      
       <pre>{lyric}</pre>

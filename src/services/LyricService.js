@@ -13,7 +13,7 @@ export default class LyricService {
   static async searchLyric (songName) {
     const resp = await axios.get(BASE_URL + '/suggest/' + encodeURIComponent(songName));
     let response = await resp.data.data;
-    if (response && response.length > 10) {
+    if (response && response.length > 12) {
       response = response.slice(0, 12);
     }
     return response;
