@@ -26,4 +26,5 @@ pre {
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2) inset;
   font-family: "Calibre", "Arial", serif;
   font-weight: 100;
+  white-space: pre-wrap;
 }

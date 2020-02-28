@@ -1,7 +1,7 @@
 import React from 'react';
 import AudioPlyr from './AudioPlyr';
 import '../styles/MediaObject.css';
-import fakeCover from '../img/cover.jpg';
+import fakeCover from '../img/1.png';
 import { Link } from 'react-router-dom';
 
 export default function MediaObject ({ lyric, to }) {

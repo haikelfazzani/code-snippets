@@ -15,9 +15,8 @@ export default function LyricDetails () {
     LyricService.getLyric(artist, title)
       .then(res => {
         setLyric(res.lyrics);
-
         let suggestions = JSON.parse(localStorage.getItem('lyric-suggestions'));
-        setInfos(suggestions.find(l => l.title.includes(title)));
+        setInfos(suggestions.find(l => l.title.includes(title) && l.artist.name.includes(artist)));
       })
       .catch(err => { setLyric('Not found...'); })
   }, [artist, title]);
