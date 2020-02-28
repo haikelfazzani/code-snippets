@@ -18,9 +18,6 @@ export default function LyricDetails () {
 
         let suggestions = JSON.parse(localStorage.getItem('lyric-suggestions'));
         setInfos(suggestions.find(l => l.title.includes(title)));
-
-        console.log(suggestions.find(l => l.title.includes(title)));
-
       })
       .catch(err => { setLyric('Not found...'); })
   }, [artist, title]);

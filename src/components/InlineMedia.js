@@ -9,8 +9,6 @@ export default function InlineMedia ({ artist, cover }) {
   useEffect(() => {
     LastFmService.getArtistInfo(artist)
       .then(res => {
-
-        console.log(res);
         setArtistBio(res)
       })
       .catch(err => { })
