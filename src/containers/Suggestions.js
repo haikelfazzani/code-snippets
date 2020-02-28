@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import LyricsContext from '../providers/LyricsContext';
 import MediaObject from '../components/MediaObject';
 import '../styles/Suggestions.css';
@@ -14,12 +13,12 @@ export default function Suggestions () {
     LyricService.searchLyric('love')
       .then(suggs => {        
         let localSuggs = localStorage.getItem('lyric-suggestions');
-        if(!localSuggs && localSuggs.length < 1) {
-          setSuggestions(suggs);
-          localStorage.setItem('lyric-suggestions', JSON.stringify(suggs));
+        if(localSuggs && localSuggs.length > 0) {          
+          setSuggestions(JSON.parse(localSuggs));
         }
         else {
-          setSuggestions(JSON.parse(localSuggs))
+          setSuggestions(suggs);
+          localStorage.setItem('lyric-suggestions', JSON.stringify(suggs));
         }
       })
       .catch(e => { })
