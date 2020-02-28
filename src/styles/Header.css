@@ -1,0 +1,39 @@
+header {
+  color: #ffffff;
+  background-color: #1c203c;
+  height: 300px;
+  display: flex;
+  border-bottom: 2px solid #0b0e24;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Calibre", "Arial", serif;
+}
+
+h1 {
+  font-size: 50px;
+  margin: 0;
+}
+
+.input-search {
+  width: 100%;
+  position: relative;
+}
+
+.input-search button {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  font-size: 18px;
+  background-color: inherit;
+  border: 0;
+  cursor: pointer;
+}
+
+.input-search input {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px 15px;
+}

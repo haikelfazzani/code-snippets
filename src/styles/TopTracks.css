@@ -1,0 +1,30 @@
+.top-tracks {
+  width: 100%;
+  max-width: 70%;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+.top-tracks ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;  
+  align-items: center;
+}
+
+.top-tracks li {
+  width: 18%;
+  max-width: 18%;  
+  margin-bottom: 10px;
+}
+
+.top-tracks li img {
+  width: 100%;
+}
+
+.top-tracks h3 {
+  font-size: 30px !important;
+  color: #1c203c;
+    border-bottom: 2px solid #1c203c;
+}

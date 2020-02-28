@@ -1,26 +1,36 @@
 {
-  "name": "lyrics-finder",
-  "version": "1.0.0",
-  "description": "lyrics finder website",
-  "main": "index.js",
-  "scripts": {
-    "dev": "lite-server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/haikelfazzani/lyrics-finder.git"
-  },
-  "keywords": ["lyrics", "finder", "listen", "preview"],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/haikelfazzani/lyrics-finder/issues"
-  },
-  "homepage": "https://github.com/haikelfazzani/lyrics-finder#readme",
-  "devDependencies": {
-    "lite-server": "^2.5.4"
-  },
+  "name": "find-lyric",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "snow-cvs": "^1.0.2"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

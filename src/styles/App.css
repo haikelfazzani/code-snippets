@@ -1,0 +1,98 @@
+@font-face {
+  font-family: calibre;
+  src: url(../fonts/CalibreRegular.otf);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'calibre';
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Raleway';
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #25242b;
+  text-align: left;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+p {font-family: 'Raleway' !important;}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a {text-decoration: none; color: #424040; transition: color .3s;}
+a:hover {color: #080808 !important;}
+
+ul {list-style: none; margin: 0; padding: 0;}
+
+.container {
+  margin: auto;
+  width: 100%;
+  max-width: 70%;
+  height: 100%;
+}
+
+
+/* util */
+.fs-12 {font-size: 12px !important;}
+
+.d-flex-sp {display: flex; justify-content: space-between; align-items: center;}
+.d-flex {display: flex; flex-wrap: wrap; align-items: center;}
+.d-flex-col {display: flex; flex-direction: column;}
+.d-flex-col-jc {display: flex; flex-direction: column; justify-content: center;}
+
+.h-100 {height: 100% !important;}
+.w-100 {width: 100% !important;}
+
+.w-25 {width: 25%; max-width: 25%;}
+
+.m-0 {margin: 0 !important;}
+
+.mt-0 {margin-top: 0 !important;}
+.mt-10 {margin-top: 10px !important;}
+.mt-20 {margin-top: 20px !important;}
+
+.mb-10 {margin-bottom: 10px !important;}
+.mb-20 {margin-bottom: 20px !important;}
+
+.mr-10 {margin-right: 10px !important;}
+.mr-20 {margin-right: 20px !important;}
+
+.ml-10 {margin-left: 10px !important;}
+.ml-20 {margin-left: 20px !important;}
+
+.p-0 {padding: 0 !important;}
+.pb-0 {padding-bottom: 10px !important;}
+.pt-10 {padding-top: 10px !important;}
+.pb-10 {padding-bottom: 10px !important;}
+
+
+@media screen and (max-width: 800px) {
+  .container, .suggestions,.top-tracks {
+    width: 95% !important; 
+    max-width: 100% !important;
+  }
+
+  .top-tracks li {width: 48%; max-width: 48%;}
+
+  .w-25{width: 50%; max-width: 50%;}
+}
