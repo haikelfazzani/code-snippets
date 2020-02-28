@@ -22,8 +22,6 @@ export default function TopArtists () {
       {topArtists && topArtists.map((t, i) => <li key={'track' + i}>
         <img src={fakeCova} alt="track cover" />
         <h4 className="m-0">{t.name}</h4>
-        <p className="fs-12 m-0">Listeners: {t.listeners}</p>
-        <p className="fs-12 m-0">Playcount: {t.playcount}</p>
       </li>)}
     </ul>
   </div>;

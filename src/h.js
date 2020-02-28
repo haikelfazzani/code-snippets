@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import './styles/App.css';
 import './styles/scroll.css';
 import LyricDetails from './pages/LyricDetails';
+import Footer from './components/Footer';
 
 export default function App () {
 
@@ -13,5 +14,7 @@ export default function App () {
       <Route exact path="/" component={Home} />
       <Route path="/lyric/:artist/:title" component={LyricDetails} />
     </Switch>
+
+    <Footer />
   </Router>;
 }
