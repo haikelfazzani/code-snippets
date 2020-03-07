@@ -6,7 +6,7 @@ export default function AudioPlyr ({ preview }) {
   const [audio] = useState(new Audio(preview));
 
   const playAudio = () => {
-    audio.play()
+    audio.play();
   }
 
   const pauseAudio = () => { audio.pause() }

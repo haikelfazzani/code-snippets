@@ -10,7 +10,7 @@ export default function Suggestions () {
   const [suggestions, setSuggestions] = useState(state.suggestions);
 
   useEffect(() => {
-    LyricService.searchLyric('love')
+    LyricService.searchLyric('numb')
       .then(suggs => {        
         let localSuggs = localStorage.getItem('lyric-suggestions');
         if(localSuggs && localSuggs.length > 0) {          
