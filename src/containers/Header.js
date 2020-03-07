@@ -12,8 +12,9 @@ export default function Header () {
     setSearchVal(e.target.value);
   }
 
-  const onSearch = async () => {
-    let suggestions = await LyricService.searchLyric(searchVal);
+  const onSearch = async (e) => {
+    e.preventDefault();
+    let suggestions = await LyricService.getDetails(searchVal);
 
     setState({ ...state, suggestions });
     setSearchVal('');
@@ -21,22 +22,25 @@ export default function Header () {
     localStorage.setItem('lyric-suggestions', JSON.stringify(suggestions));
   }
 
-
   return <header>
     <div className="container d-flex-col-jc">
 
-      <h1><i className="fas fa-headphones-alt"></i> Lyrics Finder</h1>
+      <h1 className="mb-0"><i className="fas fa-headphones-alt"></i> Lyrics Finder</h1>
       <p className="mt-0">Search and find your favorite song lyric</p>
 
-      <div className="input-search">
-        <input type="text"
-          placeholder="Search for song lyric.."
-          onChange={onInputChange}
-          value={searchVal}
-          required
-        />
-        <button onClick={onSearch}><i className="fas fa-search"></i></button>
-      </div>
+      <form onSubmit={onSearch}>
+        <div className="input-search">
+          <input type="text"
+            placeholder="Search for song lyric.."
+            onChange={onInputChange}
+            value={searchVal}
+            required
+          />
+          <button type="submit"><i className="fas fa-search"></i></button>
+        </div>
+      </form>
+
+
     </div>
   </header>;
 }

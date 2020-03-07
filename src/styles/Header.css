@@ -1,9 +1,9 @@
 header {
   color: #ffffff;
-  background-color: #1c203c;
   height: 300px;
   display: flex;
-  border-bottom: 2px solid #0b0e24;
+  background: linear-gradient(#1c203c8f, #1c203c82) ,url(../img/bg.svg);
+  box-shadow: inset 0 -20px 20px -20px rgb(26, 27, 31);
 }
 
 h1,
@@ -15,7 +15,7 @@ h3 {
 h1 {
   font-size: 50px;
   margin: 0;
-  color: #14d8cc;
+  color: #ffffff;
 }
 
 .input-search {
