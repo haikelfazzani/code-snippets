@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Suggestions from '../containers/Suggestions';
 import Header from '../containers/Header';
 

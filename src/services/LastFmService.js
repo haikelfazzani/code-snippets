@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://ws.audioscrobbler.com/2.0/';
-const API_KEY = 'api_key=80a9a5202c43a42b734fabd7c81ca259&format=json';
+const API_KEY = `api_key=${process.env.LAST_FM_API_KEY}&format=json`;
 
 export default class LastFmService {
 

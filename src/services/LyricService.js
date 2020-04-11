@@ -1,5 +1,6 @@
 import axios from 'axios';
 const BASE_URL = "https://api.lyrics.ovh";
+const forwardProxy = process.env.FORWORD_PROXY + '&url=';
 
 export default class LyricService {
 
@@ -20,7 +21,6 @@ export default class LyricService {
   }
 
   static async getDetails (param) {
-    const forwardProxy = 'https://open-rest.now.sh/api/proxy?key=40a02041-34b4-4ece-9d6c-a895ca0004f6&url='
     const resp = await axios.get(forwardProxy + 'https://api.deezer.com/search?q=' + param);
     let response = await resp.data.data;
     if (response && response.length > 12) {
