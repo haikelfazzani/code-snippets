@@ -5,7 +5,7 @@ import FormSearch from '../containers/FormSearch';
 export default function Navbar () {
   return (
 
-    <nav className="navbar navbar-dark sticky-top bg-dark flex-nowrap p-0">
+    <nav className="navbar navbar-dark sticky-top bg-dark flex-nowrap">
 
       <Link className="navbar-brand p-0" to="/"><i className="fas fa-hospital-symbol"></i></Link>
 

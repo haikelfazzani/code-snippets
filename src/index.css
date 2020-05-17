@@ -7,7 +7,7 @@
 
 body {
   background-color: var(--dark-bleu);
-  background-image: linear-gradient(135deg, #001528ef 0%, #001528ee 100%), url(../img/bg.jpg);
+
   color: #fff;
   font-size: 14px;
   font-family: 'Noto Sans';
@@ -17,7 +17,9 @@ body {
   background-color: inherit;
 }
 
-.jumbotron h1 {text-transform: uppercase;}
+.jumbotron h1 {
+  text-transform: uppercase;
+}
 
 .content {
   padding-bottom: 50px;
@@ -41,6 +43,7 @@ body {
   border-color: rgba(255, 255, 255, .1);
 }
 
+h3,
 h5,
 .btn,
 a {
@@ -48,7 +51,8 @@ a {
   text-transform: uppercase;
 }
 
-.btn-dark,.btn-primary {
+.btn-dark,
+.btn-primary {
   background-color: var(--bg-main-light);
   border-color: var(--bg-main-light);
 }
@@ -75,17 +79,58 @@ iframe {
   margin-bottom: 10px;
 }
 
+/*******************************************/
+
+.list-langs {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  justify-content: space-between;
+}
+
+.list-langs li {
+  flex: 0 0 70px;
+  scroll-snap-align: start;
+  margin: 0 .75rem;
+}
+
+.list-langs li i {
+  width: 100%;
+  background-color: var(--bg-main);
+  padding: 13px 0;
+  border-radius: 7px;
+  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.36);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color .25s;
+}
+
+.list-langs li i:hover {
+  background-color: var(--bg-main-light) !important;
+}
+
 /*****************************************/
 .fs-40 {
   font-size: 40px;
+}
+
+.fs-30 {
+  font-size: 30px;
 }
 
 .fs-70 {
   font-size: 70px;
 }
 
-.color-yellow {
+.text-yellow {
   color: #f7e018;
+}
+
+.bg-yellow {
+  background-color: #ebd300 !important;
 }
 
 /******************************************/
@@ -101,8 +146,7 @@ iframe {
 
 @media screen and (max-width: 768px) {
 
-  .content,
-  .navbar {
+  .content {
     padding: 0 25px !important;
   }
 }
@@ -115,7 +159,7 @@ iframe {
 
 ::-webkit-scrollbar-thumb {
   background: var(--dark-bleu);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

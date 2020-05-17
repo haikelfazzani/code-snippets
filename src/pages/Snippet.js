@@ -3,6 +3,7 @@ import Editor from '../components/Editor';
 import { useParams, withRouter } from 'react-router-dom';
 import Card from '../components/Card';
 import GlobalContext from '../state/GlobalContext';
+import Iframe from '../components/Iframe';
 
 function Snippet (props) {
 
@@ -19,7 +20,9 @@ function Snippet (props) {
     let snip = localSnippets.find(s => s.title === title);
     setSnipData(snip);
 
-    fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); });
+    if (snip.code) {
+      fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); });
+    }
   }, []);
 
   const onGoBack = () => {
@@ -37,10 +40,12 @@ function Snippet (props) {
     {snipData
       && <div>
         {snipData.explanation && <p className="py-2">{snipData.explanation}</p>}
-        {snipCode && <Editor
-          value={snipCode}
-          lang={snipData.language}
-        />}
+        {snipCode
+          ? <Editor
+            value={snipCode}
+            lang={snipData.language}
+          />
+          : <Iframe src={snipData.embed} embedName={snipData.embedname} />}
       </div>}
   </div>);
 }

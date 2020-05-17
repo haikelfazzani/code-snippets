@@ -12,7 +12,8 @@ export default function ListSnippets () {
   const [state, setState] = useState({
     snippets: null,
     tmpSnippets: null,
-    languages: null
+    languages: null,
+    selectedLangTags: null // every snippet has tags
   });
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function ListSnippets () {
         let languages = ['all'];
         snippets.forEach(r => {
           if (!languages.includes(r.language)) languages.push(r.language);
-        })
+        });
 
         setState({
           ...state,
@@ -30,46 +31,46 @@ export default function ListSnippets () {
           tmpSnippets: snippets,
           languages
         });
-        setGlobalState({ ...setGlobalState, snippets });
+
+        setGlobalState({ ...setGlobalState, tmpSnippets: snippets, snippets, languages });
 
         localStorage.setItem('js-snippets', JSON.stringify(snippets));
       });
   }, []);
 
   useEffect(() => {
-    if (state.tmpSnippets && globalState.searchQuery) {
-      let newSnips = state.tmpSnippets.filter(snip => snip.title
-        .toLowerCase()
-        .includes(globalState.searchQuery)
-      );
-
+    if (globalState.snippets) {
       setState({
         ...state,
-        snippets: globalState.searchQuery.length > 1 ? newSnips : state.tmpSnippets
+        snippets: globalState.snippets,
+        selectedLangTags: globalState.selectedLangTags
       });
     }
-  }, [globalState.searchQuery]);
+  }, [globalState.snippets]);
 
-  const onSelectLang = (lang) => {
-    let newSnips = [];
-    if (lang === 'all') {
-      newSnips = state.tmpSnippets;
-    }
-    else {
-      newSnips = state.tmpSnippets.filter(snip => snip.language === lang);
-    }
-    setState({ ...state, snippets: newSnips });
+  const onSelectTag = (lang) => {
+    // let newSnips = [];
+    // if (lang === 'all') {
+    //   newSnips = state.tmpSnippets;
+    // }
+    // else {
+    //   newSnips = state.tmpSnippets.filter(snip => snip.language === lang);
+    // }
+    // setState({ ...state, snippets: newSnips });
   }
 
-  return (<div className="row">
+  return (<div className="row m-0">
 
-    {state.languages && <div className="w-100 bg-main d-flex justify-content-between mb-3">
-      <button className="btn btn-dark bg-main border-0"><i className="fa fa-list"></i> Snippet list</button>
-      <Dropdown data={state.languages} title="Filter" onSelect={onSelectLang} />
+    {state.selectedLangTags && <div className="w-100 bg-main d-flex justify-content-between mb-3">
+      <button className="btn btn-dark bg-main border-0">
+        <i className="fa fa-list"></i> Snippet list
+        </button>
+      <Dropdown data={state.selectedLangTags} title="Filter" onSelect={onSelectTag} />
     </div>}
 
     {state.snippets
       ? state.snippets.map((snippet, i) => <Card snippet={snippet} key={'snip' + i} clx="mb-3" />)
       : <InlineSkeleton />}
+
   </div>);
 }

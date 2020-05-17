@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 import writeContent from '../util/console';
 
@@ -19,13 +19,13 @@ export default function Editor ({ value, lang = 'javascript' }) {
 
     let iframeDoc = jsIframe.current.contentWindow.document;
 
-    let content = await writeContent('<h1>dfqf</h1>', "", state.value);
+    let content = await writeContent('', '', state.value);
 
     iframeDoc.open().write(content);
     iframeDoc.close();
 
     function onMsg (msg) {
-      setState({ ...state, output: msg.data })
+      setState({ ...state, output: msg.data });
     }
 
     window.addEventListener("message", onMsg, false);
@@ -43,12 +43,6 @@ export default function Editor ({ value, lang = 'javascript' }) {
 
     setTimeout(() => { setState({ ...state, isCopied: false }); }, 700);
   }
-
-  useEffect(() => {
-    window.addEventListener('keydown', async (e) => {
-      if (e.ctrlKey && e.keyCode === 13) await onRun();
-    })
-  }, []);
 
   return (
     <div className="editor">
