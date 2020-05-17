@@ -1,9 +1,9 @@
 .editor {
   position: relative;
-  padding: 4px 10px;
-  font-size: 16px;  
+  padding: 4px 10px;  
+  font-size: 16px;
   background-color: var(--bg-main);  
-  box-shadow: 0 0 9px 3px rgba(21, 21, 21, 0.842);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.36);
 }
 
 .react-codemirror2,
@@ -14,14 +14,18 @@
 
 .btn-run {
   position: absolute;
-  top: 5px;
-  right: 7px;
-  font-size: 14px;
+  top: -17px;
+  right: 0;
   z-index: 2;
 }
 
+.btn-run>button {
+  border-radius: 20%;
+  box-shadow: -1px 1px 4px 2px rgba(61, 61, 61, 0.94);
+}
+
 .ouput {
-  border-top: 1px solid #2f3038;  
+  border-top: 1px solid var(--dark-bleu);  
   color: #ffffff; 
   padding-top: 12px;
   padding-bottom: 8px;

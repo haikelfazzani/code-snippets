@@ -6,4 +6,7 @@ export default class SnippetsService {
     return respJson
   }
 
+  static async getSnippetCode(snipCodeLink) {
+    return await fetch(snipCodeLink).then(res => res.text());
+  }
 } 

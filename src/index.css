@@ -1,14 +1,26 @@
 :root {
-  --bg-main: #242222;
+  --bg-main: #001528;
+  --bg-main-light: #15314b;
+  --dark-bleu: #02203c;
+  --light-bleu: #6087ac;
 }
 
 body {
-  background-color: #353535;
+  background-color: var(--dark-bleu);
   color: #fff;
   font-size: 14px;
+  font-family: 'Noto Sans';
 }
 
-.jumbotron {background-color: inherit;}
+.jumbotron {
+  background-color: inherit;
+}
+
+.jumbotron h1 {text-transform: uppercase;}
+
+.content {
+  padding-bottom: 50px;
+}
 
 .content,
 .navbar {
@@ -28,26 +40,54 @@ body {
   border-color: rgba(255, 255, 255, .1);
 }
 
+h5,
 .btn,
 a {
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-.bg-main {
-  background-color: var(--bg-main) !important;
+.btn-dark,.btn-primary {
+  background-color: var(--bg-main-light);
+  border-color: var(--bg-main-light);
 }
+
+.bg-main {
+  background-color: var(--bg-main-light) !important;
+  color: #fff;
+}
+
 /************************************/
 .cm-s-monokai.CodeMirror {
   font-size: 16px;
   background-color: inherit !important;
 }
 
-.card { padding: 0 !important; padding: 1rem;}
+.card {
+  padding: 0 !important;
+  padding: 1rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.36);
+}
 
 iframe {
   background-color: white;
   margin-bottom: 10px;
 }
+
+/*****************************************/
+.fs-40 {
+  font-size: 40px;
+}
+
+.fs-70 {
+  font-size: 70px;
+}
+
+.color-yellow {
+  color: #f7e018;
+}
+
+/******************************************/
 
 @media screen and (min-width: 768px) {
 
@@ -62,7 +102,7 @@ iframe {
 
   .content,
   .navbar {
-    padding: 0 25px;
+    padding: 0 25px !important;
   }
 }
 
@@ -73,10 +113,10 @@ iframe {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--dark);
+  background: var(--dark-bleu);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--warning);
+  background: var(--primary);
 }

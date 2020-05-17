@@ -1,32 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import jsImg from '../img/js-img.png';
-
-export default function Card ({snippet}) {
+export default function Card ({ snippet, clx = "", withLink = true }) {
   return (
-    <div className="card bg-main text-white mb-3">
-      <div className="row no-gutters">
+    <div className={"w-100 card bg-main text-white " + clx}>
 
-        <div className="col-md-1 d-flex justify-content-center align-items-center pl-3">
-          <img src={jsImg} className="card-img w-100" alt="..." />
+      <div className="w-100 h-100 d-flex">
+        <div className="mr-3 ml-3 d-flex justify-content-center align-items-center">
+          <i className="fab fa-js color-yellow fs-70"></i>
         </div>
 
-        <div className="col-md-11">
+        <div>
           <div className="card-body">
 
             <h5 className="card-title mb-0">
-              <Link to={'snippet/' + snippet.date} className="text-white">
-                <i className="fa fa-hashtag"></i> {snippet.title}
-              </Link>
+              {withLink
+                ? <Link to={'snippet/' + snippet.title} className="text-white">
+                  <i className="fa fa-hashtag"></i> {snippet.title.replace(/-/g, ' ')}
+                </Link>
+                : <><i className="fa fa-hashtag"></i> {snippet.title.replace(/-/g, ' ')}</>}
             </h5>
 
             <p className="mt-0 text-muted"><i className="fa fa-tags"></i> {snippet.tags.join(', ')}</p>
 
-            <p className="card-text lead">{snippet.description}</p>
+            <p className="card-text lead text-muted">{snippet.description}</p>
           </div>
         </div>
-
       </div>
 
     </div>

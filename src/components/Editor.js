@@ -8,10 +8,10 @@ import 'codemirror/mode/javascript/javascript';
 
 import './Editor.css';
 
-export default function Editor ({ value, onclick, lang = 'javascript' }) {
+export default function Editor ({ value, lang = 'javascript' }) {
 
   const jsIframe = useRef();
-  const [state, setState] = useState({ value, output: null });
+  const [state, setState] = useState({ value, output: null, isCopied: false });
 
   const onChange = (editor, v, value) => { setState({ ...state, value }); }
 
@@ -29,6 +29,19 @@ export default function Editor ({ value, onclick, lang = 'javascript' }) {
     }
 
     window.addEventListener("message", onMsg, false);
+  }
+
+  const onCopy = () => {
+    const el = document.createElement('textarea');
+    el.value = state.value;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    setState({ ...state, isCopied: true });
+
+    setTimeout(() => { setState({ ...state, isCopied: false }); }, 700);
   }
 
   useEffect(() => {
@@ -49,9 +62,16 @@ export default function Editor ({ value, onclick, lang = 'javascript' }) {
           lineNumbers: false
         }}
       />
-      <button onClick={onRun} className="btn-run btn btn-dark">
-        <i className="fa fa-play" onClick={onclick}></i> Run
-      </button>
+
+      <div className="btn-run mr-3">
+        <button onClick={onRun} className="btn btn-warning mr-3">
+          <i className="fa fa-play"></i>
+        </button>
+
+        <button onClick={onCopy} className="btn btn-warning">
+          <i className={"fa fa-" + (state.isCopied ? "paste text-light" : "copy")}></i>
+        </button>
+      </div>
 
       {lang === 'javascript' && <pre className="ouput mt-2">> {state.output}</pre>}
 

@@ -1,27 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Editor from '../components/Editor';
-import { useParams } from 'react-router-dom';
+import { useParams, withRouter } from 'react-router-dom';
 import Card from '../components/Card';
+import GlobalContext from '../state/GlobalContext';
 
-export default function Snippet () {
+function Snippet (props) {
 
-  let { id } = useParams();
+  let { title } = useParams();
+  const { globalState } = useContext(GlobalContext);
   const [snipData, setSnipData] = useState(null);
-  const [snipCode, setSnipCode] = useState(null)
+  const [snipCode, setSnipCode] = useState(null);
 
   useEffect(() => {
 
     let localSnippets = localStorage.getItem('js-snippets');
-    let snip = JSON.parse(localSnippets).find(s => s.date === id);
+    localSnippets = globalState.snippets ? globalState.snippets : JSON.parse(localSnippets);
+
+    let snip = localSnippets.find(s => s.title === title);
     setSnipData(snip);
 
     fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); });
-
   }, []);
 
-  return (<div className="content py-5">
+  const onGoBack = () => {
+    props.history.push('/')
+  }
 
-    {snipData && <Card snippet={snipData} />}
+  return (<div className="content py-3">
+
+    <button className="btn btn-primary mb-3" onClick={onGoBack}>
+      <i className="fa fa-arrow-left"></i>
+    </button>
+
+    {snipData && <Card snippet={snipData} withLink={false} />}
 
     {snipData
       && <div>
@@ -33,3 +44,5 @@ export default function Snippet () {
       </div>}
   </div>);
 }
+
+export default withRouter(Snippet);
