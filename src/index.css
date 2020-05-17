@@ -1,0 +1,82 @@
+:root {
+  --bg-main: #242222;
+}
+
+body {
+  background-color: #353535;
+  color: #fff;
+  font-size: 14px;
+}
+
+.jumbotron {background-color: inherit;}
+
+.content,
+.navbar {
+  transition: all .3s ease;
+  grid-area: content !important;
+  overflow: auto;
+}
+
+.navbar {
+  background-color: var(--bg-main) !important;
+}
+
+.form-control {
+  border-radius: 0;
+  color: #fff;
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.btn,
+a {
+  text-transform: uppercase;
+}
+
+.bg-main {
+  background-color: var(--bg-main) !important;
+}
+/************************************/
+.cm-s-monokai.CodeMirror {
+  font-size: 16px;
+  background-color: inherit !important;
+}
+
+.card { padding: 0 !important; padding: 1rem;}
+
+iframe {
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+
+  .content,
+  .navbar {
+    padding-left: calc((100% - 768px)/2) !important;
+    padding-right: calc((100% - 768px)/2) !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .content,
+  .navbar {
+    padding: 0 25px;
+  }
+}
+
+/**************************/
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--warning);
+}

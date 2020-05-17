@@ -1,0 +1,29 @@
+.editor {
+  position: relative;
+  padding: 4px 10px;
+  font-size: 16px;  
+  background-color: var(--bg-main);  
+  box-shadow: 0 0 9px 3px rgba(21, 21, 21, 0.842);
+}
+
+.react-codemirror2,
+.CodeMirror {
+  height: auto !important;
+  position: relative;
+}
+
+.btn-run {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  font-size: 14px;
+  z-index: 2;
+}
+
+.ouput {
+  border-top: 1px solid #2f3038;  
+  color: #ffffff; 
+  padding-top: 12px;
+  padding-bottom: 8px;
+  margin: 0;  
+}

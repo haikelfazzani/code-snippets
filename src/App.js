@@ -1,20 +1,38 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Home from './pages/Home';
+import Snippet from './pages/Snippet';
 
-import './styles/App.css';
-import './styles/scroll.css';
-import LyricDetails from './pages/LyricDetails';
-import Footer from './components/Footer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-export default function App () {
+function App () {
+  return (
+    <Router>
 
-  return <Router>
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/lyric/:artist/:title" component={LyricDetails} />
-    </Switch>
+      <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    
+          <Link className="navbar-brand col-sm-3 col-md-2 mr-0" to="/">C</Link>
+          <input className="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search" />
+          <ul className="navbar-nav px-3">
+            <li className="nav-item text-nowrap">
+              <a className="nav-link" href="#">Sign out</a>
+            </li>
+          </ul>
+    
+      </nav>
 
-    <Footer />
-  </Router>;
+
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/snippet/:id" component={Snippet} />
+      </Switch>
+    </Router>
+  );
 }
+
+export default App;
