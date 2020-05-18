@@ -11,7 +11,7 @@ export default function Iframe ({ src, embedName = "codepen" }) {
 
     <iframe
       src={
-        embedName === 'leetcode'
+        (embedName === 'leetcode' || embedName === 'trinket')
           ? src : embedName === 'codepen'
             ? BASE_URL + src + CUSTOM_STYLE
             : CODE_BOX + src + CUSTOM_STYLE_CODE_BOX

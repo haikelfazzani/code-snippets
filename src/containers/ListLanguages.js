@@ -32,7 +32,7 @@ export default function ListLanguages () {
     });
   }
 
-  return (<ul className="list-langs mb-5">
+  return (<ul className="list-langs mb-5 flipInX">
 
     {globalState.languages && globalState.languages.map((lang, i) =>
       <li
