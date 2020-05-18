@@ -21,7 +21,7 @@ function Snippet (props) {
 
       localSnippets = globalState.snippets || JSON.parse(localSnippets);
 
-      let snip = globalState.snippets.find(s => s.title === title);
+      let snip = localSnippets.find(s => s.title === title);
       setSnipData(snip);
 
       if (snip.code) {
