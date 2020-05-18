@@ -4,6 +4,7 @@ import { useParams, withRouter } from 'react-router-dom';
 import Card from '../components/Card';
 import GlobalContext from '../state/GlobalContext';
 import Iframe from '../components/Iframe';
+import { Helmet } from 'react-helmet';
 
 function Snippet (props) {
 
@@ -31,22 +32,31 @@ function Snippet (props) {
 
   return (<div className="content py-3">
 
-    <button className="btn btn-primary mb-3" onClick={onGoBack}>
-      <i className="fa fa-arrow-left"></i>
-    </button>
+    {snipData && <>
 
-    {snipData && <Card snippet={snipData} withLink={false} />}
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{snipData.language} - {snipData.title}</title>
+        <meta name="description" content={snipData.description} />
+      </Helmet>
 
-    {snipData
-      && <div>
-        {snipData.explanation && <p className="py-2">{snipData.explanation}</p>}
+      <button className="btn btn-dark btn-go-back" onClick={onGoBack}>
+        <i className="fa fa-arrow-left"></i>
+      </button>
+
+      <Card snippet={snipData} withLink={false} />
+
+      <div>
         {snipCode
           ? <Editor
             value={snipCode}
             lang={snipData.language}
           />
           : <Iframe src={snipData.embed} embedName={snipData.embedname} />}
-      </div>}
+      </div>
+
+
+    </>}
   </div>);
 }
 

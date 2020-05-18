@@ -4,14 +4,16 @@
 ```json
 [
   {
-    "title": "Find-method",
-    "code": "https:/example.com/find",
-    "description": "Javascript Find method example",
-    "language": "javascript",
+    "title": "input-autocomplete",
+    "code": null,
+    "embed":"react-input-autocomplete-knwn3",
+    "embedname":"codebox",
+    "description": "How create input autocomplete using ReactJs.",
+    "language": "react",
     "tags": [
-      "javascript",
-      "Arrays",
-      "find"
+      "react",
+      "input",
+      "autocomplete"
     ]
   }
 ]

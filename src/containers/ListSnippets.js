@@ -48,24 +48,21 @@ export default function ListSnippets () {
     }
   }, [globalState.snippets]);
 
-  const onSelectTag = (lang) => {
-    // let newSnips = [];
-    // if (lang === 'all') {
-    //   newSnips = state.tmpSnippets;
-    // }
-    // else {
-    //   newSnips = state.tmpSnippets.filter(snip => snip.language === lang);
-    // }
-    // setState({ ...state, snippets: newSnips });
+  const onSelectTag = (tag) => {
+    let newSnips = [];
+
+    newSnips = state.tmpSnippets.filter(snip => snip.tags.includes(tag));
+
+    setState({ ...state, snippets: newSnips });
   }
 
   return (<div className="row m-0">
 
     {state.selectedLangTags && <div className="w-100 bg-main d-flex justify-content-between mb-3">
       <button className="btn btn-dark bg-main border-0">
-        <i className="fa fa-list"></i> Snippet list
-        </button>
-      <Dropdown data={state.selectedLangTags} title="Filter" onSelect={onSelectTag} />
+        <i className="fa fa-list"></i> {globalState.currentLang}
+      </button>
+      <Dropdown data={state.selectedLangTags} title="TAGS" onSelect={onSelectTag} />
     </div>}
 
     {state.snippets
