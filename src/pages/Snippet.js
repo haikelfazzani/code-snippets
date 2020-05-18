@@ -15,14 +15,13 @@ function Snippet (props) {
 
   useEffect(() => {
 
-    let localSnippets = localStorage.getItem('js-snippets');
-    localSnippets = globalState.snippets ? globalState.snippets : JSON.parse(localSnippets);
+    if (globalState.snippets) {
+      let snip = globalState.snippets.find(s => s.title === title);
+      setSnipData(snip);
 
-    let snip = localSnippets.find(s => s.title === title);
-    setSnipData(snip);
-
-    if (snip.code) {
-      fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); });
+      if (snip.code) {
+        fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); });
+      }
     }
   }, []);
 
