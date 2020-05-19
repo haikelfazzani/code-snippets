@@ -10,8 +10,7 @@ export default function Dropdown ({ title, data, onSelect }) {
       <button
         type="button"
         className="btn btn-dark bg-main dropdown-toggle border-0"
-        onClick={() => { setIsDropOpen(!isDropOpen) }}>
-        <i className="fa fa-tags"></i> {title}
+        onClick={() => { setIsDropOpen(!isDropOpen) }}><i className="fa fa-tags"></i> {title}
       </button>
 
       <div className="dropdown-menu" style={{ display: isDropOpen ? 'block' : 'none' }}>

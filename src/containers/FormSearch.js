@@ -56,10 +56,8 @@ export default function FormSearch () {
       value={state}
     />
 
-
     <span className="nav-link" onClick={onSpeech}>
       <i className="fas fa-microphone"></i>
     </span>
-
   </>);
 }

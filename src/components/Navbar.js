@@ -13,7 +13,9 @@ export default function Navbar () {
 
       <ul className="navbar-nav">
         <li className="nav-item text-nowrap">
-          <a className="nav-link" href="https://github.com/haikelfazzani"><i className="fab fa-github"></i></a>
+          <a className="nav-link" href="https://github.com/haikelfazzani">
+            <i className="fab fa-github"></i>
+          </a>
         </li>
       </ul>
 

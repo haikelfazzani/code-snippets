@@ -15,9 +15,10 @@ function Snippet (props) {
 
   useEffect(() => {
 
+    let isMounted = true;
     let localSnippets = localStorage.getItem('js-snippets');
 
-    if (globalState.snippets || localSnippets) {
+    if (isMounted && (globalState.snippets || localSnippets)) {
 
       localSnippets = globalState.snippets || JSON.parse(localSnippets);
 
@@ -28,11 +29,14 @@ function Snippet (props) {
         fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); });
       }
     }
+    else {
+      onGoBack();
+    }
+
+    return () => { isMounted = false; }
   }, []);
 
-  const onGoBack = () => {
-    props.history.push('/')
-  }
+  const onGoBack = () => { props.history.push('/'); }
 
   return (<div className="content py-3">
 

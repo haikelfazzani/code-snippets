@@ -1,42 +1,39 @@
-export default function writeContent (html, css, js) {
-
-  return new Promise(async (resolve, reject) => {
-
-    let content = getContent(html, css, js);
-    resolve(content);
-
-    await handleConsole();
-  });
-};
-
-function getContent (htmlValue, cssValue, jsValue) {
-  return `<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>code snippets</title>
- 
-    <style>${cssValue}</style>
-    
-  </head>
-  <body>     
-    ${htmlValue}    
-    <script type="text/javascript" defer>${jsValue}</script>
-  </body>
-</html>`
+function removeElement (id) {
+  let elem = document.getElementById(id);
+  return elem ? elem.parentNode.removeChild(elem) : null;
 }
 
-function handleConsole () {
+function createIframe () {
+  removeElement('js-console-iframe');
+  const iframe = document.createElement('iframe');
+  iframe.id = 'js-console-iframe';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  return iframe;
+}
+
+function createScript (iframe, jsScript) {
+  const doc = iframe.contentDocument;
+  const script = doc.createElement('script');
+  const blob = new Blob([jsScript], { type: 'application/javascript' });
+  script.src = URL.createObjectURL(blob);
+  doc.body.append(script);
+}
+
+export default function evalConsole (jsScript) {
+
+  let iframeErrors = false;
 
   return new Promise((resolve, reject) => {
-    let iframe = document.getElementById('js-console');
-    let iframeErrors = false;
+
+    const iframe = createIframe();
+    createScript(iframe, jsScript);
 
     // handle errors
     iframe.contentWindow.onerror = (message, file, line, col, error) => {
       iframeErrors = true;
       iframe.contentWindow.parent.postMessage(`(${line}:${col}) -> ${error}`);
-      reject(iframeErrors);
+      reject(`(${line}:${col}) -> ${error}`);
     };
 
     // get console outputs as string
@@ -45,31 +42,33 @@ function handleConsole () {
       iframe.contentWindow.parent.postMessage(result);
       resolve(iframeErrors);
     });
-
   });
 }
-
 
 function handleConsoleOutput (iframe, resolve) {
   let logMessages = [];
 
+  //const apply = ['log', 'error', 'dir', 'info', 'warn', 'assert', 'debug', 'clear'];
+
   iframe.contentWindow.console.log = function () {
     logMessages.push.apply(logMessages, arguments);
 
-    let b = logMessages.map(v => {
-      if (v.toString() === '[object Map]' || v.toString() === '[object Set]') {
+    let output = logMessages.map(v => {
+      if (v && (v.toString() === '[object Map]' || v.toString() === '[object Set]')) {
         let arr = [...v];
         v = v.toString() + ` (${arr.length}) ` + JSON.stringify(arr, null, 2);
       }
-      if (v.toString() === '[object Object]') {
+      if (v && (v.toString() === '[object Object]')) {
         v = v.toString() + ' ' + JSON.stringify(v, null, 2);
       }
-      if (Array.isArray(v)) {
+      if (v && Array.isArray(v)) {
         v = `Array (${v.length}) ` + JSON.stringify(v, null, 2);
       }
-      return v
+
+      if (v === undefined) v = 'undefined';
+      return v;
     });
 
-    resolve(b.join('\n'));
+    resolve(output.join('\n'));
   };
 }
