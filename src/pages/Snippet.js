@@ -57,7 +57,7 @@ function Snippet (props) {
       <div>
         {snipCode
           ? <Editor
-            value={snipCode}
+            jsvalue={snipCode}
             lang={snipData.language}
           />
           : <Iframe src={snipData.embed} embedName={snipData.embedname} />}

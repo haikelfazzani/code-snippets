@@ -8,10 +8,10 @@ import 'codemirror/mode/javascript/javascript';
 
 import './Editor.css';
 
-export default function Editor ({ value, lang = 'javascript' }) {
+export default function Editor ({ jsvalue, lang = 'javascript' }) {
 
   const [state, setState] = useState({ output: null, isCopied: false });
-  const [editorVal, setEditorVal] = useState(value);
+  const [editorVal, setEditorVal] = useState(jsvalue);
 
   const onChange = (editor, v, data) => {
     setEditorVal(data);
@@ -44,8 +44,8 @@ export default function Editor ({ value, lang = 'javascript' }) {
   }
 
   useEffect(()=>{  
-    setEditorVal(value);
-  },[value]);
+    setEditorVal(jsvalue);
+  },[jsvalue]);
 
   return (
     <div className="editor">
