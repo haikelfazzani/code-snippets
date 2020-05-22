@@ -36,7 +36,7 @@ body {
 .navbar {
   background-color: var(--bg-main) !important;
 }
-
+/*******************************/
 .form-control {
   border-radius: 0;
   color: #fff;
@@ -122,7 +122,16 @@ iframe {
   background-color: var(--bg-main-light) !important;
 }
 
-/*****************************************/
+/******************** About page *********************/
+.codetrace img {
+  width: 50%;
+  height: 80px;
+}
+/***************************************/
+.fs-16 {
+  font-size: 16px;
+}
+
 .fs-40 {
   font-size: 40px;
 }

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import ListLanguages from '../containers/ListLanguages';
 
 function Home () {
-  return (<div className="content">
+  return (<div className="content mb-5">
     <div className="jumbotron text-center m-0 p-0 py-3">
 
       <h3 className="mb-0 fadeIn">Hi! My name's Haikel Fazzani</h3>

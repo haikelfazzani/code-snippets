@@ -12,6 +12,10 @@
   position: relative;
 }
 
+.cm-s-monokai .CodeMirror-gutters {
+  background: #001528;
+}
+
 .btn-run {
   position: absolute;
   top: -17px;
@@ -25,10 +29,33 @@
   border-color: var(--bg-main);
 }
 
+/********* Console output box *********/
 .ouput {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background-color: var(--bg-main);
   border-top: 1px solid var(--dark-bleu);  
-  color: #ffffff; 
-  padding-top: 12px;
-  padding-bottom: 8px;
-  margin: 0;  
+  color: #ffffff;   
+
+  min-height: 20%;
+  max-height: 86%;
+
+  min-width: 20%;
+  max-width: 40%;
+
+  z-index: 9999;
+  font-size: 12px;
+  overflow: auto;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.36);
+}
+
+.ouput div {
+  background-color: var(--bg-main-light);
+  padding: 10px;
+}
+
+.ouput pre {
+  padding: 10px;
+  color: #ffffff;
 }

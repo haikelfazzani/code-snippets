@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
-import evalConsole from '../util/console';
+import { evalConsole, formatOutput } from '../util/console';
 
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/monokai.css';
 import 'codemirror/mode/javascript/javascript';
 
+import 'codemirror/addon/fold/foldgutter.css'
+
+import 'codemirror/addon/edit/closebrackets';
+import 'codemirror/addon/edit/matchbrackets';
+
+import 'codemirror/addon/fold/foldcode';
+import 'codemirror/addon/fold/foldgutter';
+import 'codemirror/addon/fold/brace-fold';
+import 'codemirror/addon/fold/xml-fold';
+
 import './Editor.css';
 
 export default function Editor ({ jsvalue, lang = 'javascript' }) {
 
-  const [state, setState] = useState({ output: null, isCopied: false });
+  const [state, setState] = useState({ output: null, isCopied: false, hideConsole: true });
   const [editorVal, setEditorVal] = useState(jsvalue);
 
   const onChange = (editor, v, data) => {
@@ -18,21 +28,17 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
   }
 
   const onRun = async () => {
-
     try {
-      await evalConsole(editorVal);
-    } catch (error) { }
-
-    function onMsg (msg) {
-      setState({ ...state, output: msg.data });
+      let result = await evalConsole(editorVal);
+      setState({ ...state, output: formatOutput(result), hideConsole: false });
+    } catch (error) {
+      setState({ ...state, output: error, hideConsole: false });
     }
-
-    window.addEventListener("message", onMsg, false);
   }
 
   const onCopy = () => {
     const el = document.createElement('textarea');
-    el.value = state.value;
+    el.value = editorVal;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
@@ -43,17 +49,21 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
     setTimeout(() => { setState({ ...state, isCopied: false }); }, 700);
   }
 
-  useEffect(()=>{  
-    setEditorVal(jsvalue);
-  },[jsvalue]);
-
   return (
     <div className="editor">
       <CodeMirror
         autoCursor={false}
         onChange={onChange}
         value={editorVal}
-        options={{ mode: 'javascript', theme: 'monokai', lineNumbers: false }}
+        options={{
+          mode: 'javascript',
+          theme: 'monokai',
+          lineNumbers: true,
+          matchBrackets: true,
+          autoCloseBrackets: true,
+          foldGutter: true,
+          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        }}
       />
 
       <div className="btn-run mr-3">
@@ -66,7 +76,12 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
         </button>
       </div>
 
-      {lang === 'javascript' && <pre className="ouput mt-2">> {state.output}</pre>}
+      {lang === 'javascript' && <div className="ouput" style={{ display: state.hideConsole ? 'none' : 'block' }}>
+        <div onClick={() => { setState({ ...state, hideConsole: true }) }}>
+          <i className="fa fa-terminal"></i> Console
+        </div>
+        <pre>> {state.output}</pre>
+      </div>}
     </div>
   );
 
