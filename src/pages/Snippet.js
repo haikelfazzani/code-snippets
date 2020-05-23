@@ -44,7 +44,7 @@ function Snippet (props) {
 
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{snipData.language} - {snipData.title.replace(/-|_/g,' ')}</title>
+        <title>{snipData.language} - {snipData.title.replace(/-|_/g, ' ')}</title>
         <meta name="description" content={snipData.description} />
       </Helmet>
 
@@ -58,7 +58,7 @@ function Snippet (props) {
         {snipCode
           ? <Editor
             jsvalue={snipCode}
-            lang={snipData.language}
+            lang={snipData.language === 'algorithms' ? 'javascript' : snipData.language}
           />
           : <Iframe src={snipData.embed} embedName={snipData.embedname} />}
       </div>

@@ -1,5 +1,6 @@
 const langColors = [
   { lang: 'all', color: 'secondary' },
+  { lang: 'algorithms', color: 'pink' },
   { lang: 'javascript', color: 'yellow' },
   { lang: 'html5', color: 'danger' },
   { lang: 'css3', color: 'purple' },
@@ -12,7 +13,12 @@ const langColors = [
 function getIconAndColor (lang, textOrBg = 'bg-') {
   // icons: fab fa-lang
   let langIcon = 'fab fa-' + (
-    lang === 'javascript' ? 'js' : lang === 'all' ? 'buysellads' : lang === 'c++' ? 'cuttlefish' : lang);
+    lang === 'algorithms' ? 'pushed'
+      : lang === 'javascript' ? 'js'
+        : lang === 'all' ? 'buysellads'
+          : lang === 'c++' ? 'cuttlefish'
+            : lang
+  );
 
   // get language color
   let color = langColors.find(l => l.lang === lang).color;
