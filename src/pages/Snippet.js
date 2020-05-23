@@ -44,7 +44,7 @@ function Snippet (props) {
 
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{snipData.language} - {snipData.title}</title>
+        <title>{snipData.language} - {snipData.title.replace(/-|_/g,' ')}</title>
         <meta name="description" content={snipData.description} />
       </Helmet>
 

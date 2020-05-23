@@ -49,6 +49,16 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
     setTimeout(() => { setState({ ...state, isCopied: false }); }, 700);
   }
 
+  const onFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.querySelector('.content').requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
+
   return (
     <div className="editor">
       <CodeMirror
@@ -71,16 +81,22 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
           <i className="fa fa-play"></i>
         </button>
 
-        <button onClick={onCopy} className="btn btn-dark">
+        <button onClick={onCopy} className="btn btn-dark mr-3">
           <i className={"fa fa-" + (state.isCopied ? "paste text-light" : "copy")}></i>
         </button>
+
+        <button onClick={onFullScreen} className="btn btn-dark">
+          <i className="fa fa-compress"></i>
+        </button>
+
       </div>
 
       {lang === 'javascript' && <div className="ouput" style={{ display: state.hideConsole ? 'none' : 'block' }}>
-        <div onClick={() => { setState({ ...state, hideConsole: true }) }}>
-          <i className="fa fa-terminal"></i> Console
+        <div className="d-flex justify-content-between align-items-center">
+          <span><i className="fa fa-terminal"></i> Console</span>
+          <span className="badge badge-danger" onClick={() => { setState({ ...state, hideConsole: true }); }}>x</span>
         </div>
-        <pre>> {state.output}</pre>
+        <pre>{state.output}</pre>
       </div>}
     </div>
   );
