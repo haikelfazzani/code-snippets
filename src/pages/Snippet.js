@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
-import Editor from '../components/Editor';
 import { useParams, withRouter } from 'react-router-dom';
 import Card from '../components/Card';
 import GlobalContext from '../state/GlobalContext';
 import Iframe from '../components/Iframe';
 import { Helmet } from 'react-helmet';
+import Monaco from '../components/Monaco';
 
 function Snippet (props) {
 
@@ -54,9 +54,9 @@ function Snippet (props) {
 
       <Card snippet={snipData} withLink={false} />
 
-      <div>
+      <div className="w-100 h-75">
         {snipCode
-          ? <Editor
+          ? <Monaco
             jsvalue={snipCode}
             lang={snipData.language === 'algorithms' ? 'javascript' : snipData.language}
           />

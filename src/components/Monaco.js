@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+import React, { useState } from "react";
+import { ControlledEditor } from "@monaco-editor/react";
 import { evalConsole, formatOutput } from '../util/console';
-
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/monokai.css';
-import 'codemirror/mode/javascript/javascript';
-
-import 'codemirror/addon/fold/foldgutter.css'
-
-import 'codemirror/addon/edit/closebrackets';
-import 'codemirror/addon/edit/matchbrackets';
-
-import 'codemirror/addon/fold/foldcode';
-import 'codemirror/addon/fold/foldgutter';
-import 'codemirror/addon/fold/brace-fold';
-import 'codemirror/addon/fold/xml-fold';
-
 import './Editor.css';
 
-export default function Editor ({ jsvalue, lang = 'javascript' }) {
+function debounce (callback, wait) {
+  let timeout;
+  return (...args) => {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => callback.apply(context, args), wait);
+  };
+}
+
+export default function Monaco ({ jsvalue, lang = 'javascript' }) {
 
   const [state, setState] = useState({ output: null, isCopied: false, hideConsole: true });
+  const [editorObject, setEditorObject] = useState(null);
   const [editorVal, setEditorVal] = useState(jsvalue);
 
-  const onChange = (editor, v, data) => {
-    setEditorVal(data);
+  const editorDidMount = (e, editor) => {
+    setEditorObject(editor);
+    // let containerEl = document.querySelector('.editor');
+    // settings.height = containerEl.scrollHeight + (containerEl.scrollHeight * 0.24);
   }
+
+  const handleEditorChange = (ev, value) => {
+    setEditorVal(value);
+  };
 
   const onRun = async () => {
     try {
@@ -50,6 +51,7 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
   }
 
   const onFullScreen = () => {
+
     if (!document.fullscreenElement) {
       document.documentElement.querySelector('.content').requestFullscreen();
     } else {
@@ -61,20 +63,23 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
 
   return (
     <div className="w-100 h-100 editor">
-      <CodeMirror
-        autoCursor={false}
-        onChange={onChange}
+      <ControlledEditor
+        editorDidMount={editorDidMount}
+        height="100vh"
+        width="100%"
         value={editorVal}
+        onChange={handleEditorChange}
+        language="javascript"
+        theme="vs-dark"
         options={{
-          mode: 'javascript',
-          theme: 'monokai',
-          lineNumbers: true,
-          matchBrackets: true,
-          autoCloseBrackets: true,
-          foldGutter: true,
-          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+          automaticLayout: true,
+          minimap: {
+            enabled: false
+          },
+          scrollBeyondLastLine: false
         }}
       />
+
 
       <div className="btn-run mr-3">
         <button onClick={onRun} className="btn btn-dark mr-3">
@@ -100,5 +105,4 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
       </div>}
     </div>
   );
-
 }

@@ -1,19 +1,15 @@
 .editor {
-  position: relative;
-  padding: 4px 10px;  
+  position: relative; 
   font-size: 16px;
   background-color: var(--bg-main);  
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.36);
+  text-transform: lowercase;
 }
 
-.react-codemirror2,
-.CodeMirror {
-  height: auto !important;
-  position: relative;
-}
 
-.cm-s-monokai .CodeMirror-gutters {
-  background: #001528;
+.editor section {
+  height: 100% !important;
+  width: 100%;
 }
 
 .btn-run {
@@ -24,9 +20,9 @@
 }
 
 .btn-run>button {
-  background-color: var(--bg-main);
+  background-color:#1e1e1e;
   border-radius: 20%;
-  border-color: var(--bg-main);
+  border-color: #1e1e1e;
 }
 
 /********* Console output box *********/

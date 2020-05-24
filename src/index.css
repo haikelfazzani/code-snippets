@@ -20,7 +20,10 @@ body {
   text-transform: uppercase;
 }
 
+.navbar {height: 8vh;}
+
 .content {
+  height: 92vh;
   margin-top: 10px;
   padding-bottom: 50px;
   position: relative;
@@ -69,13 +72,8 @@ a {
 .btn-go-back {
   position: absolute;
   top: 2px;
-  left: calc((100% - 768px)/2);
+  left: calc((100% - 764px)/2);
   z-index: 9;
-}
-
-.cm-s-monokai.CodeMirror {
-  font-size: 16px;
-  background-color: inherit !important;
 }
 
 .card {

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@monaco-editor/react": "^3.3.0",
     "codemirror": "^5.53.2",
     "react": "^16.13.1",
     "react-codemirror2": "^7.1.0",
