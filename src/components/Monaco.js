@@ -81,8 +81,7 @@ export default function Monaco ({ jsvalue, lang = 'javascript' }) {
           automaticLayout: true,
           minimap: {
             enabled: false
-          },
-          scrollBeyondLastLine: false
+          }
         }}
       />
 
@@ -103,9 +102,9 @@ export default function Monaco ({ jsvalue, lang = 'javascript' }) {
       </div>
 
       {lang === 'javascript' && <div className="ouput" style={{ display: state.hideConsole ? 'none' : 'block' }}>
-        <div className="d-flex justify-content-between align-items-center">
-          <span><i className="fa fa-terminal"></i> Console</span>
-          <span className="badge badge-danger" onClick={() => { setState({ ...state, hideConsole: true }); }}>x</span>
+        <div className="w-100 d-flex justify-content-between align-items-center bg-main">
+          <span className="w-75"><i className="fa fa-terminal"></i> Console</span>
+          <span className="badge badge-dark bg-main" onClick={() => { setState({ ...state, hideConsole: true }); }}>x</span>
         </div>
         <pre>{state.output}</pre>
       </div>}

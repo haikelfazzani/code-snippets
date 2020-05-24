@@ -51,8 +51,7 @@ body {
 
 h3,
 h5,
-.btn,.badge,
-a {
+.btn,.badge, .card a {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
