@@ -38,7 +38,7 @@ function Snippet (props) {
 
   const onGoBack = () => { props.history.push('/'); }
 
-  return (<div className="content py-3">
+  return (<div className="content py-5">
 
     {snipData && <>
 

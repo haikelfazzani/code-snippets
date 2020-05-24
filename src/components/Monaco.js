@@ -20,8 +20,14 @@ export default function Monaco ({ jsvalue, lang = 'javascript' }) {
 
   const editorDidMount = (e, editor) => {
     setEditorObject(editor);
-    // let containerEl = document.querySelector('.editor');
-    // settings.height = containerEl.scrollHeight + (containerEl.scrollHeight * 0.24);
+    console.log(editor);
+
+    
+
+    // editor.onDidLayoutChange((settings) => {
+    //   let containerEl = document.querySelector('.editor');
+    //   settings.height = containerEl.scrollHeight + (containerEl.scrollHeight * 0.24);
+    // })
   }
 
   const handleEditorChange = (ev, value) => {
@@ -62,10 +68,10 @@ export default function Monaco ({ jsvalue, lang = 'javascript' }) {
   }
 
   return (
-    <div className="w-100 h-100 editor">
+    <div className="w-100 editor">
       <ControlledEditor
         editorDidMount={editorDidMount}
-        height="100vh"
+        height="100%"
         width="100%"
         value={editorVal}
         onChange={handleEditorChange}

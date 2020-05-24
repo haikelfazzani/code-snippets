@@ -10,6 +10,7 @@ body {
   color: #fff;
   font-size: 14px;
   font-family: 'Noto Sans';
+  overflow-y: hidden;
 }
 
 .jumbotron {
@@ -20,13 +21,14 @@ body {
   text-transform: uppercase;
 }
 
-.navbar {height: 8vh;}
+.navbar {height: 8vh; overflow: hidden !important; }
 
 .content {
   height: 92vh;
   margin-top: 10px;
   padding-bottom: 50px;
   position: relative;
+  overflow: auto;
 }
 
 .content,
@@ -71,9 +73,9 @@ a {
 /************************************/
 .btn-go-back {
   position: absolute;
-  top: 2px;
+  top: 25px;
   left: calc((100% - 764px)/2);
-  z-index: 9;
+  z-index: 999;
 }
 
 .card {
