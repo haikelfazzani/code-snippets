@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
-import Card from '../components/Card';
+import CardImg from '../components/CardImg';
 import GlobalContext from '../state/GlobalContext';
 import Iframe from '../components/Iframe';
 import { Helmet } from 'react-helmet';
@@ -52,7 +52,7 @@ function Snippet (props) {
         <i className="fa fa-arrow-left"></i>
       </button>
 
-      <Card snippet={snipData} withLink={false} />
+      <CardImg snippet={snipData} />
 
       <div className="w-100 h-75">
         {snipCode

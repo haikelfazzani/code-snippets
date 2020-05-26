@@ -3,32 +3,10 @@ import { ControlledEditor } from "@monaco-editor/react";
 import { evalConsole, formatOutput } from '../util/console';
 import './Editor.css';
 
-function debounce (callback, wait) {
-  let timeout;
-  return (...args) => {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => callback.apply(context, args), wait);
-  };
-}
-
 export default function Monaco ({ jsvalue, lang = 'javascript' }) {
 
   const [state, setState] = useState({ output: null, isCopied: false, hideConsole: true });
-  const [editorObject, setEditorObject] = useState(null);
   const [editorVal, setEditorVal] = useState(jsvalue);
-
-  const editorDidMount = (e, editor) => {
-    setEditorObject(editor);
-    console.log(editor);
-
-    
-
-    // editor.onDidLayoutChange((settings) => {
-    //   let containerEl = document.querySelector('.editor');
-    //   settings.height = containerEl.scrollHeight + (containerEl.scrollHeight * 0.24);
-    // })
-  }
 
   const handleEditorChange = (ev, value) => {
     setEditorVal(value);
@@ -70,7 +48,6 @@ export default function Monaco ({ jsvalue, lang = 'javascript' }) {
   return (
     <div className="w-100 editor">
       <ControlledEditor
-        editorDidMount={editorDidMount}
         height="100%"
         width="100%"
         value={editorVal}

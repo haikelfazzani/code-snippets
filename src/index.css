@@ -40,6 +40,7 @@ body {
 
 .navbar {
   background-color: var(--bg-main) !important;
+  height: 50px;
 }
 /*******************************/
 .form-control {
