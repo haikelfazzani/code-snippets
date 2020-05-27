@@ -14,7 +14,7 @@ export default function ListLanguages () {
     if (val && val.length > 0 && val !== 'all') {
       newSnips = globalState.tmpSnippets.filter(snip => snip.language.includes(val));
 
-      // every language has tags: we filter tags by removing dupicates
+      // every language has tags: we filter tags by removing duplicates
       globalState.tmpSnippets.forEach(snip => {
         if (snip.language === val) {
           snip.tags.forEach(tag => {
@@ -32,21 +32,23 @@ export default function ListLanguages () {
     });
   }
 
-  return (<ul className="list-langs mb-5 flipInX">
+  return (
+    <ul className="list-langs mb-5 flipInX">
 
-    {globalState.languages && globalState.languages.map((lang, i) =>
-      <li
-        className="text-center"
-        key={lang + i}
-        onClick={() => { onSelectLang(lang) }}
-      >
+      {globalState.languages && globalState.languages.map((lang, i) =>
+        <li
+          className="text-center"
+          key={lang + i}
+          onClick={() => { onSelectLang(lang) }}
+        >
 
-        <i className={"fs-40 mb-1 " + getIconAndColor(lang)
-          + (globalState.currentLang === lang ? "bg-main" : "")}>
-        </i>
+          <i className={"fs-40 mb-1 " + getIconAndColor(lang)
+            + (globalState.currentLang === lang ? "bg-main" : "")}>
+          </i>
 
-        <div>{lang}</div>
-      </li>)}
+          <div>{lang}</div>
+        </li>)}
 
-  </ul>);
+    </ul>
+  );
 }
