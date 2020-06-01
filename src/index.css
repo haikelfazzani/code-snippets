@@ -10,7 +10,12 @@ body {
   color: #fff;
   font-size: 14px;
   font-family: 'Noto Sans';
-  overflow-y: hidden;
+  overflow-y: hidden;  
+}
+
+#root {
+  min-height: 100vh;
+  width: 100vw;
 }
 
 .jumbotron {
@@ -21,27 +26,22 @@ body {
   text-transform: uppercase;
 }
 
-.navbar {height: 8vh; overflow: hidden !important; }
-
 .content {
   height: 92vh;
   margin-top: 10px;
-  padding-bottom: 50px;
-  position: relative;
-  overflow: auto;
-}
-
-.content,
-.navbar {
-  transition: all .3s ease;
-  grid-area: content !important;
+  margin-top: 10px;
+  padding-bottom: 100px;
+  position: relative;  
   overflow: auto;
 }
 
 .navbar {
+  height: 8vh;
   background-color: var(--bg-main) !important;
-  height: 50px;
+  overflow: hidden !important; 
 }
+
+.content, .navbar {transition: all .3s ease;}
 /*******************************/
 .form-control {
   border-radius: 0;
@@ -127,6 +127,15 @@ iframe {
   width: 50%;
   height: 80px;
 }
+
+/***************** Top from search ******************/
+.form-search {position: relative;}
+.form-search button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-radius: 0;
+}
 /***************************************/
 .fs-16 {
   font-size: 16px;
@@ -189,7 +198,7 @@ iframe {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--dark-bleu);
+  background: var(--light-bleu);
   border-radius: 5px;
 }
 

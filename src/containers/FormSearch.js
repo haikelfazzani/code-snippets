@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import GlobalContext from '../state/GlobalContext';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 var browserError = false;
 try {
@@ -11,14 +11,13 @@ try {
   recognition = {};
 }
 
-export default function FormSearch () {
+function FormSearch (props) {
 
-  const { globalState, setGlobalState } = useContext(GlobalContext);
   const [state, setState] = useState('');
 
   const onSearch = (e) => {
-    let val = (e.target.value).toLowerCase();
-    filterSnippets(val);
+    e.preventDefault();
+    props.history.push('/search?s=' + state);
   }
 
   const onSpeech = () => {
@@ -27,37 +26,28 @@ export default function FormSearch () {
         recognition.start();
         recognition.onresult = (event) => {
           const sp = event.results[0][0].transcript;
-          filterSnippets(sp);
+          setState(sp);
+          props.history.push('/search?s=' + sp);
         }
       } catch (error) { recognition.stop(); }
     }
   }
 
-  const filterSnippets = (val) => {
-    setState(val);
-    let newSnips = [];
-
-    if (val && val.length > 0) {
-      newSnips = globalState.tmpSnippets.filter(snip => snip.title.toLowerCase().includes(val));
-    }
-
-    setGlobalState({
-      ...globalState,
-      snippets: newSnips.length > 0 ? newSnips : globalState.tmpSnippets
-    });
-  }
-
   return (<>
-    <input
-      className="form-control form-control-dark"
-      type="search"
-      placeholder="# Search"
-      onChange={onSearch}
-      value={state}
-    />
+    <form onSubmit={onSearch} className="w-100 form-search">
+      <input
+        className="form-control form-control-dark"
+        type="search"
+        placeholder="# Search"
+        onChange={(e) => { setState((e.target.value).toLowerCase()); }}
+        value={state}
+      />
 
-    <span className="nav-link" onClick={onSpeech}>
-      <i className="fas fa-microphone"></i>
-    </span>
+      <button type="submit" className="btn btn-dark"><i className="fas fa-search"></i></button>
+    </form>
+
+    <span className="nav-link" onClick={onSpeech}><i className="fas fa-microphone"></i></span>
   </>);
 }
+
+export default withRouter(FormSearch);

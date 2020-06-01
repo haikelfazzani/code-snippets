@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Snippet from './pages/Snippet';
 
 import Navbar from './components/Navbar';
+import SearchResult from './pages/SearchResult';
 
 function App () {
   return (
@@ -15,6 +16,7 @@ function App () {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/snippet/:title" component={Snippet} />
+        <Route path="/search" component={SearchResult} />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>

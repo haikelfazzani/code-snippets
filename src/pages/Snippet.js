@@ -54,7 +54,7 @@ function Snippet (props) {
 
       <CardImg snippet={snipData} />
 
-      <div className="w-100 h-75">
+      <div className="w-100">
         {snipCode
           ? <Monaco
             jsvalue={snipCode}
@@ -62,8 +62,6 @@ function Snippet (props) {
           />
           : <Iframe src={snipData.embed} embedName={snipData.embedname} />}
       </div>
-
-
     </>}
   </div>);
 }
