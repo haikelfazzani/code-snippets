@@ -25,9 +25,11 @@ function Snippet (props) {
       let snip = localSnippets.find(s => s.title === title);
       setSnipData(snip);
 
-      if (snip.code) {
-        fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); });
+      if (snip && snip.code) {
+        fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); })
+          .catch(e => { onGoBack(); });
       }
+      else { onGoBack(); }
     }
     else {
       onGoBack();

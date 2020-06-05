@@ -1,35 +1,14 @@
 import React, { useContext } from 'react';
 import GlobalContext from '../state/GlobalContext';
 import getIconAndColor from '../util/getIconAndColor';
+import { withRouter } from 'react-router-dom';
 
-export default function ListLanguages () {
+function ListLanguages (props) {
 
-  const { globalState, setGlobalState } = useContext(GlobalContext);
+  const { globalState } = useContext(GlobalContext);
 
   const onSelectLang = (val) => {
-
-    let newSnips = [];
-    let selectedLangTags = [];
-
-    if (val && val.length > 0 && val !== 'all') {
-      newSnips = globalState.tmpSnippets.filter(snip => snip.language.includes(val));
-
-      // every language has tags: we filter tags by removing duplicates
-      globalState.tmpSnippets.forEach(snip => {
-        if (snip.language === val) {
-          snip.tags.forEach(tag => {
-            if (tag && !selectedLangTags.includes(tag)) selectedLangTags.push(tag);
-          })
-        }
-      });
-    }
-
-    setGlobalState({
-      ...globalState,
-      snippets: newSnips.length > 0 ? newSnips : globalState.tmpSnippets,
-      selectedLangTags: newSnips.length > 0 ? selectedLangTags : null,
-      currentLang: val
-    });
+    if(val !== 'all') props.history.push('/' + val);
   }
 
   return (
@@ -48,7 +27,8 @@ export default function ListLanguages () {
 
           <div>{lang}</div>
         </li>)}
-
     </ul>
   );
 }
+
+export default withRouter(ListLanguages);

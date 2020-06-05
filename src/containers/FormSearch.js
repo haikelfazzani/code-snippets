@@ -17,7 +17,7 @@ function FormSearch (props) {
 
   const onSearch = (e) => {
     e.preventDefault();
-    props.history.push('/search?s=' + state);
+    if (state.length > 0) props.history.push('/search?s=' + state);
   }
 
   const onSpeech = () => {

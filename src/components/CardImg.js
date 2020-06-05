@@ -14,7 +14,7 @@ export default function CardImg ({ snippet, clx = "" }) {
           <div className="card-body">
 
             <h5 className="card-title mb-0">
-              <i className="fa fa-hashtag"></i> {snippet.title.replace(/-/g, ' ')}}
+              <i className="fa fa-hashtag"></i> {snippet.title.replace(/-/g, ' ')}
             </h5>
 
             <p className="mt-0 text-muted"><i className="fa fa-tags"></i> {snippet.tags.join(', ')}</p>
