@@ -4,6 +4,7 @@ import GlobalContext from '../state/GlobalContext';
 import SnippetsService from '../services/SnippetsService';
 import InlineSkeleton from '../components/InlineSkeleton';
 import Card from '../components/Card';
+import getIconAndColor from '../util/getIconAndColor';
 
 export default function SnippetsPerLang () {
 
@@ -27,17 +28,25 @@ export default function SnippetsPerLang () {
     return { snippets, tmpSnippets: snippets, tags: ['all', ...tags] };
   });
 
+  const [activeTag, setActiveTag] = useState('all');
+
   const onTag = (tag) => {
     let nSnips = state.tmpSnippets.filter(snip => snip.tags.includes(tag));
     setState({ ...state, snippets: tag !== 'all' ? nSnips : state.tmpSnippets });
+    setActiveTag(tag)
   }
 
-  return <div className="content py-5">
-    <h5 className="mb-3 text-muted"><i className={"fab fa-" + language}></i> {language}</h5>
+  return <div className="content py-3">
+    <h5 className="mb-3 text-muted">
+      <span className="mr-2">
+        <i className={"fab fa-" + getIconAndColor(language) + " bg-inherit"}></i> {language} Snippets
+      </span>
+      {state.snippets && <span>({state.snippets.length})</span>}
+    </h5>
 
-    {state.tags && state.tags.length > 0 && <ul className="inline-list mb-3">
+    {state.tags && state.tags.length > 0 && <ul className="inline-list mb-3 flipInX">
       {state.tags.map((tag, i) => <li
-        className="badge badge-secondary"
+        className={"badge badge-secondary " + (tag === activeTag ? "bg-dark" : "")}
         key={'tag' + i}
         onClick={() => { onTag(tag) }}>{tag}
       </li>)}

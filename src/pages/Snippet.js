@@ -26,10 +26,10 @@ function Snippet (props) {
       setSnipData(snip);
 
       if (snip && snip.code) {
-        fetch(snip.code).then(res => res.text()).then(resp => { setSnipCode(resp); })
+        fetch(snip.code).then(res => res.text())
+          .then(resp => { setSnipCode(resp); })
           .catch(e => { onGoBack(); });
-      }
-      else { onGoBack(); }
+      }      
     }
     else {
       onGoBack();
@@ -38,7 +38,7 @@ function Snippet (props) {
     return () => { isMounted = false; }
   }, []);
 
-  const onGoBack = () => { props.history.push('/'); }
+  const onGoBack = () => { props.history.goBack(); }
 
   return (<div className="content py-5">
 

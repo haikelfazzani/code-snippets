@@ -58,7 +58,7 @@ body {
   padding: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
-  background-color: var(--bg-main-light) !important;
+  background-color: var(--bg-main-light);
   cursor: pointer;
 }
 
@@ -100,7 +100,7 @@ h5,
 .btn-go-back {
   position: absolute;
   top: 25px;
-  left: calc((100% - 764px)/2);
+  left: calc((100% - 768px)/2);
   z-index: 999;
 }
 
@@ -197,6 +197,10 @@ iframe {
 .text-teal {color: var(--teal) !important;}
 
 .ltsp2 {letter-spacing: 2px;}
+
+
+.bg-dark {background-color: var(--bg-main) !important;}
+.bg-inherit {background-color: inherit !important;}
 /******************************************/
 
 @media screen and (min-width: 768px) {
