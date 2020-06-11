@@ -3,7 +3,7 @@ import { ControlledEditor } from "@monaco-editor/react";
 import { evalConsole, formatOutput } from '../util/console';
 import './Editor.css';
 
-export default function Monaco ({ jsvalue, lang = 'javascript' }) {
+export default function Editor ({ jsvalue, lang = 'javascript' }) {
 
   const [state, setState] = useState({ output: null, isCopied: false, hideConsole: true });
   const [editorVal, setEditorVal] = useState(jsvalue);
@@ -30,7 +30,6 @@ export default function Monaco ({ jsvalue, lang = 'javascript' }) {
     document.body.removeChild(el);
 
     setState({ ...state, isCopied: true });
-
     setTimeout(() => { setState({ ...state, isCopied: false }); }, 700);
   }
 
@@ -47,11 +46,12 @@ export default function Monaco ({ jsvalue, lang = 'javascript' }) {
 
   return (
     <div className="w-100 editor">
+
       <ControlledEditor
-        height="100%"
+        height="100vh"
         width="100%"
-        value={editorVal}
         onChange={handleEditorChange}
+        value={jsvalue}
         language="javascript"
         theme="vs-dark"
         options={{
@@ -61,7 +61,6 @@ export default function Monaco ({ jsvalue, lang = 'javascript' }) {
           }
         }}
       />
-
 
       <div className="btn-run mr-3">
         <button onClick={onRun} className="btn btn-dark mr-3">

@@ -1,0 +1,18 @@
+.container-fluid {
+  height: 91.7vh !important;
+  position: relative;
+  overflow: hidden;
+  border: 5px solid var(--bg-main-light);
+}
+
+.editor-banner {
+  position: absolute;
+  top: 10px;
+  left: 45%;
+  z-index: 9999;
+}
+
+pre {
+  color: #FFEB3B;
+  padding: 10px;
+}

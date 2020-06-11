@@ -4,7 +4,7 @@ import CardImg from '../components/CardImg';
 import GlobalContext from '../state/GlobalContext';
 import Iframe from '../components/Iframe';
 import { Helmet } from 'react-helmet';
-import Monaco from '../components/Monaco';
+import Editor from '../containers/Editor';
 
 function Snippet (props) {
 
@@ -58,7 +58,7 @@ function Snippet (props) {
 
       <div className="w-100">
         {snipCode
-          ? <Monaco
+          ? <Editor
             jsvalue={snipCode}
             lang={snipData.language === 'algorithms' ? 'javascript' : snipData.language}
           />

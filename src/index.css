@@ -3,6 +3,7 @@
   --bg-main-light: #15314b;
   --dark-bleu: #02203c;
   --light-bleu: #6087ac;
+  --bg-editor:#1e1e1e;
 }
 
 body {
@@ -201,6 +202,7 @@ iframe {
 
 .bg-dark {background-color: var(--bg-main) !important;}
 .bg-inherit {background-color: inherit !important;}
+.bg-editor {background-color: var(--bg-editor);}
 /******************************************/
 
 @media screen and (min-width: 768px) {

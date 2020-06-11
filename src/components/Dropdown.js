@@ -6,7 +6,6 @@ export default function Dropdown ({ title, data, onSelect }) {
 
   return (
     <div className="dropdown mr-1">
-
       <button
         type="button"
         className="btn btn-dark bg-main dropdown-toggle border-0"

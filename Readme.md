@@ -1,22 +1,14 @@
 # My blog 
+- Interview practive (algorithms and frontend)
+- Typescript and Javascript playground
+- Code snippets
+
+### Captures
+![](https://i.ibb.co/xgBwd1s/myblog.png)
 
 ### Snippets structure
 ```json
-[
-  {
-    "title": "input-autocomplete",
-    "code": null,
-    "embed":"react-input-autocomplete-knwn3",
-    "embedname":"codebox",
-    "description": "How create input autocomplete using ReactJs.",
-    "language": "react",
-    "tags": [
-      "react",
-      "input",
-      "autocomplete"
-    ]
-  }
-]
+
 ```
 
 ### License
