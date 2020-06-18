@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 
 import Home from './pages/Home';
 import Snippet from './pages/Snippet';
-import Playground from './pages/Playground';
 
 import SearchResult from './pages/SearchResult';
 import SnippetsPerLang from './pages/SnippetsPerLang';
@@ -18,9 +17,8 @@ function App () {
 
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/snippet/:title" component={Snippet} />
+        <Route path="/snippet/:title" component={Snippet} />
         <Route path="/search" component={SearchResult} />
-        <Route path="/playground" component={Playground} />
 
         <Route path="/:language" component={SnippetsPerLang} />
 

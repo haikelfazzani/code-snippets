@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import InlineSkeleton from '../components/InlineSkeleton';
 import Card from '../components/Card';
-import SnippetsService from '../services/SnippetsService';
 import useFilter from '../hooks/useFilter';
 
 function SearchResult () {

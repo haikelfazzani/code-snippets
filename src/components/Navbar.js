@@ -10,7 +10,6 @@ export default function Navbar () {
       <Link className="navbar-brand p-0" to="/"><i className="fas fa-hospital-symbol"></i></Link>
 
       <FormSearch />
-      <Link to="/playground"><i className="fa fa-terminal text-white mr-3"></i></Link>
       <ul className="navbar-nav">
         <li className="nav-item text-nowrap">
           <a className="nav-link" href="https://github.com/haikelfazzani">
