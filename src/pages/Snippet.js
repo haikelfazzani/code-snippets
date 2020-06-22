@@ -5,6 +5,7 @@ import GlobalContext from '../state/GlobalContext';
 import Iframe from '../components/Iframe';
 import { Helmet } from 'react-helmet';
 import Editor from '../containers/Editor';
+import loadComments from '../util/loadComments';
 
 function Snippet (props) {
 
@@ -23,9 +24,13 @@ function Snippet (props) {
       localSnippets = globalState.snippets || JSON.parse(localSnippets);
 
       let snip = localSnippets.find(s => s.title === title);
+     
       setSnipData(snip);
 
       if (snip && snip.code) {
+
+        loadComments(title);
+
         fetch(snip.code).then(res => res.text())
           .then(resp => { setSnipCode(resp); })
           .catch(e => { onGoBack(); });
@@ -65,6 +70,8 @@ function Snippet (props) {
           : <Iframe src={snipData.embed} embedName={snipData.embedname} />}
       </div>
     </>}
+
+    <div id="graphcomment"></div>
   </div>);
 }
 

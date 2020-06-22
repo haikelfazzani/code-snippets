@@ -1,6 +1,6 @@
 # My blog 
 - Interview practive (algorithms and frontend)
-- Typescript and Javascript playground
+- Javascript playground
 - Code snippets
 
 ### Captures
@@ -10,6 +10,12 @@
 ```json
 
 ```
+
+### Techs
+- React/ReactRouterDom/ReactHelmet
+- Bootstrap/fontawesome/GoogleFonts
+- Monaco Editor
+- graphcomment api
 
 ### License
 MIT
