@@ -36,7 +36,7 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
   const onFullScreen = () => {
 
     if (!document.fullscreenElement) {
-      document.documentElement.querySelector('.content').requestFullscreen();
+      document.documentElement.querySelector('.editor').requestFullscreen();
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();

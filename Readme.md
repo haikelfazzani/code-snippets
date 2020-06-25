@@ -6,16 +6,16 @@
 ### Captures
 ![](https://i.ibb.co/xgBwd1s/myblog.png)
 
-### Snippets structure
-```json
-
-```
-
-### Techs
+### Built with
 - React/ReactRouterDom/ReactHelmet
 - Bootstrap/fontawesome/GoogleFonts
 - Monaco Editor
 - graphcomment api
+
+### Snippets structure
+```json
+
+```
 
 ### License
 MIT
