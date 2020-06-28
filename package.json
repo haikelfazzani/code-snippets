@@ -1,12 +1,14 @@
 {
-  "name": "js-cheatsheet",
+  "name": "code-snippets",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@monaco-editor/react": "^3.3.0",
+    "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
+    "react-markdown": "^4.3.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },

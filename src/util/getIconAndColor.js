@@ -4,10 +4,10 @@ const langColors = [
   { lang: 'javascript', color: 'yellow' },
   { lang: 'html5', color: 'danger' },
   { lang: 'css3', color: 'purple' },
-  { lang: 'node-js', color: 'teal' },
+  { lang: 'go', color: 'primary' },
   { lang: 'react', color: 'info' },
-  { lang: 'python', color: 'primary' },
-  { lang: 'c++', color: 'purple' }
+  { lang: 'python', color: 'teal' },
+  { lang: 'node-js', color: 'success' }
 ];
 
 function getIconAndColor (lang, textOrBg = 'bg-') {
@@ -17,8 +17,8 @@ function getIconAndColor (lang, textOrBg = 'bg-') {
       lang === 'algorithms' ? 'pushed'
         : lang === 'javascript' ? 'js'
           : lang === 'all' ? 'buysellads'
-            : lang === 'c++' ? 'cuttlefish'
-              : lang
+              : lang === 'go' ? 'google'
+                : lang
     );
 
     // get language color

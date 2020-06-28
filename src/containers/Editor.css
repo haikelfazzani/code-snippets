@@ -2,8 +2,6 @@
   height: 700px;
   position: relative; 
   font-size: 16px;
-  background-color: var(--bg-main);  
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.36);
 }
 
 
@@ -14,15 +12,11 @@
 
 .btn-run {
   position: absolute;
-  top: -17px;
-  right: 0;
+  top: 10px;
+  right: 20px;
   z-index: 2;
-}
-
-.btn-run>button {
-  background-color:#1e1e1e;
-  border-radius: 20%;
-  border-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
 }
 
 /********* Console output box *********/
@@ -36,8 +30,8 @@
   min-height: 20%;
   max-height: 86%;
 
-  min-width: 20%;
-  max-width: 70%;
+  min-width: 30%;
+  max-width: 100%;
 
   z-index: 9999;
   font-size: 12px;
@@ -52,4 +46,9 @@
 .ouput pre {
   padding: 10px;
   color: #ffffff;
+}
+
+/**********************************/
+.monaco-editor, .monaco-editor-background, .monaco-editor .inputarea.ime-input,.monaco-editor .margin {
+  background-color: var( --dark-bleu) !important;
 }

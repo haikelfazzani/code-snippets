@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SnippetsService from "../services/SnippetsService";
+import AirSnippets from "../services/AirSnippets";
 
 export default function useFilter () {
 
@@ -10,14 +10,15 @@ export default function useFilter () {
 
     try {
       searchQuery = window.location.search.split('=')[1];
-    } catch (error) { }
 
-    SnippetsService.searchSnippets(searchQuery)
-      .then(snips => {
-        if (snips) {
-          setSnippets(snips);
-        }
-      });
+      AirSnippets.searchSnippets(searchQuery)
+        .then(snips => {
+          if (snips) {
+            setSnippets(snips);
+          }
+        });
+
+    } catch (error) { }
   }, [window.location.search]);
 
   return { snippets };

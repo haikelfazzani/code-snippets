@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { ControlledEditor } from "@monaco-editor/react";
-import { evalConsole, formatOutput } from '../util/console';
+import { formatOutput } from '../util/console';
 import './Editor.css';
+import RunCode from "../util/RunCode";
 
 export default function Editor ({ jsvalue, lang = 'javascript' }) {
 
@@ -14,8 +15,13 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
 
   const onRun = async () => {
     try {
-      let result = await evalConsole(editorVal);
-      setState({ ...state, output: formatOutput(result), hideConsole: false });
+      let result = await RunCode.run(lang, editorVal);
+
+      setState({
+        ...state,
+        output: lang.startsWith('javascript') ? formatOutput(result) : result,
+        hideConsole: false
+      });
     } catch (error) {
       setState({ ...state, output: error, hideConsole: false });
     }
@@ -45,29 +51,14 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
   }
 
   return (
-    <div className="w-100 editor">
-
-      <ControlledEditor
-        height="100vh"
-        width="100%"
-        onChange={handleEditorChange}
-        value={jsvalue}
-        language="javascript"
-        theme="vs-dark"
-        options={{
-          automaticLayout: true,
-          minimap: {
-            enabled: false
-          }
-        }}
-      />
+    <div className="w-100 editor pr-3">
 
       <div className="btn-run mr-3">
-        <button onClick={onRun} className="btn btn-dark mr-3">
+        <button onClick={onRun} className="btn btn-dark mb-3">
           <i className="fa fa-play"></i>
         </button>
 
-        <button onClick={onCopy} className="btn btn-dark mr-3">
+        <button onClick={onCopy} className="btn btn-dark mb-3">
           <i className={"fa fa-" + (state.isCopied ? "paste text-light" : "copy")}></i>
         </button>
 
@@ -77,13 +68,29 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
 
       </div>
 
-      {lang === 'javascript' && <div className="ouput" style={{ display: state.hideConsole ? 'none' : 'block' }}>
+      <ControlledEditor
+        height="100vh"
+        width="100%"
+        onChange={handleEditorChange}
+        value={jsvalue}
+        language={lang}
+        theme="vs-dark"
+        options={{
+          automaticLayout: true,
+          minimap: {
+            enabled: false
+          },
+          fontSize: "16px"
+        }}
+      />
+
+      <div className="ouput" style={{ display: state.hideConsole ? 'none' : 'block' }}>
         <div className="w-100 d-flex justify-content-between align-items-center bg-main">
           <span className="w-75"><i className="fa fa-terminal"></i> Console</span>
           <span className="badge badge-dark bg-main" onClick={() => { setState({ ...state, hideConsole: true }); }}>x</span>
         </div>
         <pre>{state.output}</pre>
-      </div>}
+      </div>
     </div>
   );
 }

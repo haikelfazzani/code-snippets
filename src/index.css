@@ -99,12 +99,25 @@ h5,
 
 .badge { padding: 7px 10px;}
 
-/************************************/
+/****************** snippet page ******************/
+.snippet {
+  min-height: 92vh;
+}
+.snip-desc-container {
+  padding: 2rem;
+}
+
+.snip-desc h1 {text-transform: uppercase;}
+
+.snip-desc p {font-size: 16px !important;     text-align: justify !important;}
+
+.snip-desc pre { background-color: var(--bg-main); color: var(--light); padding: 20px; }
+
 .btn-go-back {
   position: absolute;
-  top: 25px;
-  left: calc((100% - 768px)/2);
-  z-index: 999;
+  top: -7px;
+  left: 20px;
+  z-index: 9999;
 }
 
 .card {
@@ -166,6 +179,7 @@ iframe {
   border-radius: 0;
 }
 /***************************************/
+h2 , label, h1{text-transform: uppercase; letter-spacing: 2px; }
 .fs-16 {
   font-size: 16px;
 }
@@ -214,6 +228,7 @@ iframe {
     padding-left: calc((100% - 768px)/2) !important;
     padding-right: calc((100% - 768px)/2) !important;
   }
+  
 }
 
 @media screen and (max-width: 768px) {
@@ -221,8 +236,7 @@ iframe {
   .content {    padding: 20px 25px 0 !important;}
 
   .btn-go-back {top: 0px;left: 25px;}
-
-  .d-none {display: none !important;}
+  .disp-none {display: none !important;}
 }
 
 @media (max-width: 520px){

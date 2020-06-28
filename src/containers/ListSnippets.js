@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import SnippetsService from '../services/SnippetsService';
 import Card from '../components/Card';
 import InlineSkeleton from '../components/InlineSkeleton';
 import { useContext } from 'react';
-import GlobalContext from '../state/GlobalContext';;
+import GlobalContext from '../state/GlobalContext';
+import AirSnippets from '../services/AirSnippets';
 
 export default function ListSnippets () {
 
@@ -11,11 +11,10 @@ export default function ListSnippets () {
   const [state, setState] = useState({ snippets: null, languages: null });
 
   useEffect(() => {
-    SnippetsService.getSnippets()
+    AirSnippets.getSnippets()
       .then(snippets => {
-
         let languages = ['all'];
-        snippets.forEach(r => {
+        snippets.map(sn => sn.fields).forEach(r => {
           if (!languages.includes(r.language)) languages.push(r.language);
         });
 

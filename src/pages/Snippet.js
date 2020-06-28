@@ -1,77 +1,62 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, withRouter } from 'react-router-dom';
-import CardImg from '../components/CardImg';
-import GlobalContext from '../state/GlobalContext';
-import Iframe from '../components/Iframe';
 import { Helmet } from 'react-helmet';
 import Editor from '../containers/Editor';
 import loadComments from '../util/loadComments';
+import AirSnippets from '../services/AirSnippets';
+import ReactMarkdown from 'react-markdown';
 
 function Snippet (props) {
 
-  let { title } = useParams();
-  const { globalState } = useContext(GlobalContext);
+  let { id } = useParams();
   const [snipData, setSnipData] = useState(null);
-  const [snipCode, setSnipCode] = useState(null);
 
   useEffect(() => {
-
-    let isMounted = true;
-    let localSnippets = localStorage.getItem('js-snippets');
-
-    if (isMounted && (globalState.snippets || localSnippets)) {
-
-      localSnippets = globalState.snippets || JSON.parse(localSnippets);
-
-      let snip = localSnippets.find(s => s.title === title);
-     
-      setSnipData(snip);
-
-      if (snip && snip.code) {
-
-        loadComments(title);
-
-        fetch(snip.code).then(res => res.text())
-          .then(resp => { setSnipCode(resp); })
-          .catch(e => { onGoBack(); });
-      }      
-    }
-    else {
-      onGoBack();
-    }
-
-    return () => { isMounted = false; }
+    AirSnippets.getSnippet(id)
+      .then(snippet => {
+        setSnipData(snippet);
+        loadComments(id);
+      });
   }, []);
 
   const onGoBack = () => { props.history.goBack(); }
 
-  return (<div className="content py-5">
+  return (<div className="w-100 snippet">
 
     {snipData && <>
 
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{snipData.language} - {snipData.title.replace(/-|_/g, ' ')}</title>
-        <meta name="description" content={snipData.description} />
+        <title>{snipData.fields.title} - {snipData.fields.language}</title>
+        <meta name="description" content={snipData.fields.description} />
       </Helmet>
+      
+      <p></p>
 
-      <button className="btn btn-dark btn-go-back" onClick={onGoBack}>
-        <i className="fa fa-arrow-left"></i>
-      </button>
+      <div className="row">
+        <div className="col-md-6 p-0">
+          <button className="btn btn-dark btn-go-back disp-none" onClick={onGoBack}>
+            <i className="fa fa-arrow-left"></i>
+          </button>
 
-      <CardImg snippet={snipData} />
+          <div className="snip-desc-container">
+            <ReactMarkdown source={snipData.fields.description} className="snip-desc" />
 
-      <div className="w-100">
-        {snipCode
-          ? <Editor
-            jsvalue={snipCode}
-            lang={snipData.language === 'algorithms' ? 'javascript' : snipData.language}
+            <span className="badge badge-light mr-3"><i className="fa fa-clock"></i> {snipData.fields.date}</span>
+            <span className="badge badge-light mb-3">{snipData.fields.language}</span>
+            <div id="graphcomment"></div>
+          </div>
+        </div>
+
+        <div className="col-md-6 p-0">
+          <Editor
+            jsvalue={snipData.fields.code}
+            lang={snipData.fields.language === 'algorithms' ? 'javascript' : snipData.fields.language}
           />
-          : <Iframe src={snipData.embed} embedName={snipData.embedname} />}
+        </div>
       </div>
     </>}
 
-    <div id="graphcomment"></div>
   </div>);
 }
 
