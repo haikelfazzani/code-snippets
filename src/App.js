@@ -12,9 +12,7 @@ import AddSnippet from './pages/AddSnippet';
 
 function App () {
   return (
-    <Router>
-
-      <Navbar />
+    <Router>      
 
       <Switch>
         <Route exact path="/" component={Home} />

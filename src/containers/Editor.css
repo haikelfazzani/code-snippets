@@ -1,9 +1,8 @@
 .editor {
-  height: 700px;
+  height: 650px;
   position: relative; 
   font-size: 16px;
 }
-
 
 .editor section {
   height: 100% !important;
@@ -28,9 +27,9 @@
   color: #ffffff;   
 
   min-height: 20%;
-  max-height: 86%;
+  max-height: 90%;
 
-  min-width: 30%;
+  min-width: 40%;
   max-width: 100%;
 
   z-index: 9999;
@@ -46,6 +45,13 @@
 .ouput pre {
   padding: 10px;
   color: #ffffff;
+}
+
+iframe {
+  background-color: white;
+  height: 100vh;
+  width:100%;
+  overflow:auto;
 }
 
 /**********************************/

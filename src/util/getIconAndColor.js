@@ -17,7 +17,7 @@ function getIconAndColor (lang, textOrBg = 'bg-') {
       lang === 'algorithms' ? 'pushed'
         : lang === 'javascript' ? 'js'
           : lang === 'all' ? 'buysellads'
-              : lang === 'go' ? 'google'
+            : lang === 'go' ? 'google'
                 : lang
     );
 

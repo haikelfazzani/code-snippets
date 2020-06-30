@@ -3,6 +3,7 @@ import { ControlledEditor } from "@monaco-editor/react";
 import { formatOutput } from '../util/console';
 import './Editor.css';
 import RunCode from "../util/RunCode";
+import Iframe from "../components/Iframe";
 
 export default function Editor ({ jsvalue, lang = 'javascript' }) {
 
@@ -69,17 +70,15 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
       </div>
 
       <ControlledEditor
-        height="100vh"
+        height="100%"
         width="100%"
         onChange={handleEditorChange}
         value={jsvalue}
-        language={lang}
+        language={lang.replace(/\d+/g, '')}
         theme="vs-dark"
         options={{
           automaticLayout: true,
-          minimap: {
-            enabled: false
-          },
+          minimap: { enabled: false },
           fontSize: "16px"
         }}
       />
@@ -87,9 +86,12 @@ export default function Editor ({ jsvalue, lang = 'javascript' }) {
       <div className="ouput" style={{ display: state.hideConsole ? 'none' : 'block' }}>
         <div className="w-100 d-flex justify-content-between align-items-center bg-main">
           <span className="w-75"><i className="fa fa-terminal"></i> Console</span>
-          <span className="badge badge-dark bg-main" onClick={() => { setState({ ...state, hideConsole: true }); }}>x</span>
+          <span className="badge badge-dark bg-main"
+            onClick={() => { setState({ ...state, hideConsole: true }); }}>x</span>
         </div>
-        <pre>{state.output}</pre>
+
+        {lang === 'html5' ? <Iframe data={editorVal} /> : <pre>{state.output}</pre>}
+
       </div>
     </div>
   );

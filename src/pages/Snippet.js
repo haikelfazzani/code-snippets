@@ -29,13 +29,11 @@ function Snippet (props) {
         <meta charSet="utf-8" />
         <title>{snipData.fields.title} - {snipData.fields.language}</title>
         <meta name="description" content={snipData.fields.description} />
-      </Helmet>
-      
-      <p></p>
+      </Helmet>      
 
       <div className="row">
-        <div className="col-md-6 p-0">
-          <button className="btn btn-dark btn-go-back disp-none" onClick={onGoBack}>
+        <div className="col-md-5 p-0">
+          <button className="btn btn-dark btn-go-back" onClick={onGoBack}>
             <i className="fa fa-arrow-left"></i>
           </button>
 
@@ -48,7 +46,7 @@ function Snippet (props) {
           </div>
         </div>
 
-        <div className="col-md-6 p-0">
+        <div className="col-md-7 p-0">
           <Editor
             jsvalue={snipData.fields.code}
             lang={snipData.fields.language === 'algorithms' ? 'javascript' : snipData.fields.language}

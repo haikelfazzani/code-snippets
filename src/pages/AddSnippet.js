@@ -17,7 +17,7 @@ export default function AddSnippet () {
 
   return (<div className="content py-3 mb-5">
 
-    <h2 className="text-muted"><i className="fa fa-plus"></i> Add snippet</h2>
+    <h3 className="text-muted"><i className="fa fa-plus"></i> Add snippet</h3>
 
     <form onSubmit={onAddSnippet}>
 

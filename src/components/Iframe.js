@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function Iframe ({ data }) {
-  return (<>
-    {console.log(data.fields.embed)}
+
+  let iframe = useRef()
+
+  useEffect(() => {
+
+    let iframeDoc = iframe.current.contentDocument;
+
+    iframeDoc.open()
+    iframeDoc.write(data)
+    iframeDoc.close()
+
+  }, [data]);
+
+  return (
     <iframe
-      src={data.fields.embed}
-      style={{ width: "97%", minHeight: "92vh", fontSize: "16px" }}
-      scrolling="no"
-      title={data.fields.title}
-      frameBorder="no"
-      allowtransparency="true"
-      allowFullScreen={true}>
-    </iframe></>);
+      ref={iframe}
+      title="code snippets"
+      frameBorder="no">
+    </iframe>
+  );
 }

@@ -8,7 +8,7 @@
 
 body {
   background-color: var(--dark-bleu);
-  color: #fff;
+  color: #ffffff;
   font-size: 14px;
   font-family: 'Noto Sans';
   overflow-x: hidden; 
@@ -101,7 +101,7 @@ h5,
 
 /****************** snippet page ******************/
 .snippet {
-  min-height: 92vh;
+  height: 100vh;
 }
 .snip-desc-container {
   padding: 2rem;
@@ -111,11 +111,15 @@ h5,
 
 .snip-desc p {font-size: 16px !important;     text-align: justify !important;}
 
-.snip-desc pre { background-color: var(--bg-main); color: var(--light); padding: 20px; }
+.snip-desc pre { background-color: var(--dark-bleu); color: var(--light); padding: 20px; }
+
+.graphcomment-button a {width: 100% !important; max-width: 100% !important;}
 
 .btn-go-back {
+  background-color: inherit !important;
+  border: 0;
   position: absolute;
-  top: -7px;
+  top: 0px;
   left: 20px;
   z-index: 9999;
 }
@@ -124,11 +128,6 @@ h5,
   padding: 0 !important;
   padding: 1rem;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.36);
-}
-
-iframe {
-  background-color: white;
-  margin-bottom: 10px;
 }
 
 /*******************************************/
