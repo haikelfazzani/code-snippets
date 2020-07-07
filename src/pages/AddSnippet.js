@@ -28,12 +28,12 @@ export default function AddSnippet () {
 
       <div className="form-group">
         <label htmlFor="description">Description</label>
-        <textarea className="form-control" id="description" name="description" rows="5"></textarea>
+        <textarea className="form-control" id="description" name="description" rows="5" required></textarea>
       </div>
 
       <div className="form-group">
         <label htmlFor="code">code</label>
-        <textarea className="form-control" id="code" name="code" rows="5"></textarea>
+        <textarea className="form-control" id="code" name="code" rows="5" required></textarea>
       </div>
 
       <div className="row">

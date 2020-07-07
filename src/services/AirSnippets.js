@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'https://api.airtable.com/v0/app9FBp8ae6NjnfqH/t_snippets';
+const BASE_URL = process.env.REACT_APP_AIRTABLE_BASE_URL;
 
 export default class AirSnippets {
 

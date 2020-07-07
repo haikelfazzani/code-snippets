@@ -22,7 +22,9 @@ export default function SnippetsPerLang () {
         if (r) {
           setSnippets(r);
           setTmpSnippets(r);
-          setTags([...tags, ...r.map(r => r.fields.tags.split(/\,/g)).flat()])
+
+          let ntags = [...tags, ...r.map(r => r.fields.tags.split(/\,/g)).flat()];
+          setTags([...new Set(ntags)]);
         }
       });
   }, [language]);
