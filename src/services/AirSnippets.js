@@ -9,7 +9,7 @@ export default class AirSnippets {
         url: BASE_URL,
         method: 'POST',
         headers: {
-          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE,
+          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE_TOKEN,
           'Content-Type': 'application/json'
         },
         data: {
@@ -34,9 +34,10 @@ export default class AirSnippets {
     try {
       let resp = await axios(BASE_URL + '/' + snippetId, {
         headers: {
-          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE
+          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE_TOKEN
         }
       });
+      console.log(resp.data);
       return resp.data;
     } catch (error) {
       return null;
@@ -47,7 +48,7 @@ export default class AirSnippets {
     try {
       let resp = await axios(BASE_URL + '?maxRecords=13', {
         headers: {
-          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE
+          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE_TOKEN
         }
       });
       return resp.data.records;
@@ -62,7 +63,7 @@ export default class AirSnippets {
     try {
       let resp = await axios(BASE_URL, {
         headers: {
-          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE
+          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE_TOKEN
         }
       });
 
@@ -76,7 +77,7 @@ export default class AirSnippets {
     try {
       let resp = await axios(BASE_URL, {
         headers: {
-          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE
+          'Authorization': 'Bearer ' + process.env.REACT_APP_AIRTABLE_TOKEN
         }
       });
 

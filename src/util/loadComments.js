@@ -1,7 +1,7 @@
 export default function loadComments (snippetTitle) {
 
   window.gc_params = {
-    graphcomment_id: 'haikel-fazzani',
+    graphcomment_id: process.env.REACT_APP_GRAPHCOMMENT_ID,
     overlay: { "width": 480, "button": { "background": "#15314b", "color": "#ffffff" } },
   };
 
